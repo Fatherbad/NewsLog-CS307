@@ -1,0 +1,190 @@
+DB TABLES
+
+USERS
+user_id		int(11) PRIMARY KEY
+username	text
+password	text
+
+CATEGORIES
+cat_id		int(11) PRIMARY KEY
+category	text
+
+KEYWORDS
+key_id		int(11) PRIMARY KEY
+keyword		text
+
+CAT_KEY
+cat_key_id	int(11) PRIMARY KEY
+cat_id		int(11)
+keyword		text
+
+USER_KEY
+user_key_id	int(11) PRIMARY KEY
+user_id		int(11)
+keyword		text
+
+note: all tables do not allow null values (MySQL keyword NOT NULL)
+
+------------------------------------------------------------------------------
+
+TABLE DESCRIPTIONS
+
+USERS: A table of registered users of Newslog
+--user_id: A unique id number for each user
+--username: A username that is designated by the user
+	    (Should be unique??)
+--password: A password that is designated by the user
+	    (Appended to a salt? Built-in PHP methods for encryption + security)
+
+CATEGORIES: A table consisting of all possible categories
+--cat_id: A unique id number for each category
+--category: A specific branch of information (technology, sports, etc.)
+
+KEYWORDS: A table consisting of keywords discovered from fetching articles
+--key_id: A unique id number for each keyword
+--keyword: A term to describe the basis of an article (Windows, Mac, Johnny Manziel)
+
+CAT_KEY: A table consisting of all category and keyword combinations
+--cat_key_id: A unique id number for each category/keyword combination
+--category_id: An id number relating to a specific category from the CATEGORIES table
+--keyword: A keyword that corresponds with a specific category
+
+USER_KEY: A table consisting of all user and keyword combinations
+--user_key_id: A unique id number for each user/keyword combination
+--user_id: An id number relating to a specific user from the USERS table
+--keyword: A keyword that corresponds with a specific user
+
+------------------------------------------------------------------------------------------
+
+SAMPLE DATA (test1 database)
+
+USERS
+
+  user_id	username	password
+  -------      ----------       ----------
+     1           deweya          password1
+     2           ajd09           password2
+     3          deweya964        password3
+
+CATEGORIES
+
+  cat_id	category
+  -------      ----------
+     1         technology
+     2          sports
+     3          world
+
+KEYWORDS
+
+   key_id       keyword
+  --------     ---------
+     1          windows
+     2         macintosh
+     3       indianapolis colts
+     4        drew brees
+     5          nato
+     6          syria
+
+CAT_KEY
+
+  cat_key_id	cat_id	   keyword
+ -----------   --------   ---------
+      1           1        windows
+      2           1       macintosh
+      3           2      indianapolis colts
+      4           2       drew brees
+      5           3         nato
+      6           3         syria
+
+USER_KEY
+
+  user_key_id    user_id    keyword
+ ------------   ---------  ---------
+      1             1       windows
+      2             1     indianapolis colts
+      3             1        nato
+      4             1        syria
+      5             2       macintosh
+      6             2       drew brees
+      7             2        nato
+      8             3     indianapolis colts
+      9             3      drew brees
+
+---------------------------------------------------------------------------------------
+
+ADDITIONAL NOTES
+
+1) For CAT_KEY and USER_KEY, why don't we just use the name of the category or user?
+   Why do we use cat_id and user_id instead?
+
+   We use the id numbers because using integers is significantly faster than using
+   strings. In order to determine the user or category that the id number corresponds to,
+   you will have to use a JOIN or WHERE clause. This schema is what is found in the real 
+   world.
+
+2) For CAT_KEY and USER_KEY, how would I use a JOIN or WHERE clause to determine what 
+   keyword corresponds with the given cat_id or user_id?
+
+   To determine category/keyword pairings:
+
+	SELECT category, keyword FROM `cat_key` c
+	JOIN (`categories` c2)
+	ON (c.cat_id = c2.cat_id);
+
+	Or you can do this
+
+	SELECT category, keyword
+	FROM `categories`, `cat_key`
+	WHERE categories.cat_id = cat_key.cat_id;
+
+   To determine user/keyword pairings:
+
+	SELECT username, keyword FROM `user_key` u
+	JOIN (`users` u2)
+	ON (u.user_id = u2.user_id);
+
+	Or you can do this
+
+	SELECT username, keyword
+	FROM `user_key`, `users`
+	WHERE user_key.user_id = users.user_id;
+
+   Both JOIN and WHERE do the same thing with the same efficiency. However, JOINs are
+   more commonly used for tables that have a similar column, where the WHILE clause is
+   used to accompany JOIN by filtering out entries with a certain value.
+
+3) What is a result-set?
+
+   A result set is what is returned from a SQL query. The above JOINs and WHEREs return
+   result-sets that allow you to view keyword relationships. Furthermore, a SELECT
+   statement returns a result-set that allows you to view data in the given table.
+
+   For our project, manipulating tables to create result-sets will likely be necessary
+   for maintaining our database.
+
+4) How will we update the database?
+
+   We will have to make an a few different RESTful calls anytime we want to update the
+   database.
+
+   Updating the USERS, CATEGORIES, and KEYWORDS categories will be simple. First, we will
+   have to determine if the user, category, or keyword already exists, and if it does,
+   we will not update. MySQL has built-in functionality that makes this very simple.
+   If the tables do not already have the given information, we can use the INSERT INTO
+   statement.
+
+   Updating the CAT_KEY and USER_KEY tables will be a little more difficult. To update
+   these tables, we will first have to make sure the given relationship does not already
+   exist. I think MySQL already provides functionality to prevent this as well (UNIQUE
+   and IF NOT EXISTS operators). Then, depending on how the information is passed, we will
+   have to either JOIN tables and then INSERT INTO or UPDATE or simply just INSERT INTO or
+   UPDATE.
+
+5) What is the difference between INSERT INTO and UPDATE?
+
+   INSERT INTO is used to create a completely different row in a table.
+   UPDATE is used to change the value of a certain cell in a table.
+
+   We will most likely be using INSERT INTO to update the USERS, CATEGORIES, and
+   KEYWORDS tables, and using both INSERT INTO and UPDATE to update the CAT_KEY and
+   USER_KEY tables. 
