@@ -16,7 +16,7 @@ import android.widget.TextView;
  */
 public class CategoryActivity extends AppCompatActivity {
 
-    public static final String CATEGORY = "com.example.paul.demo.CATEGORY";
+    public static final String CATEGORY = "CATEGORY";
 
     public Button sportsButton;
     public Button politicsButton;
@@ -36,7 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO:Add Category Tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra((String) sportsButton.getTag(), CATEGORY);
+                intent.putExtra(CATEGORY, (String) sportsButton.getTag());
                 startActivity(intent);
             }
         });
@@ -47,7 +47,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra((String)politicsButton.getTag(), CATEGORY);
+                intent.putExtra(CATEGORY, (String) politicsButton.getTag());
                 startActivity(intent);
             }
         });
@@ -58,7 +58,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra((String)techButton.getTag(), CATEGORY);
+                intent.putExtra(CATEGORY, (String) techButton.getTag());
                 startActivity(intent);
             }
         });
@@ -69,7 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra((String)scienceButton.getTag(), CATEGORY);
+                intent.putExtra(CATEGORY, (String) scienceButton.getTag());
                 startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra((String)economyButton.getTag(), CATEGORY);
+                intent.putExtra(CATEGORY, (String) economyButton.getTag());
                 startActivity(intent);
             }
         });
@@ -91,7 +91,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra((String)sportsButton.getTag(), CATEGORY);
+                intent.putExtra(CATEGORY, (String) entertainmentButton.getTag());
                 startActivity(intent);
             }
         });
