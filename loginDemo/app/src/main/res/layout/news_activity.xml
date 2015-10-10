@@ -3,17 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".LoginActivity">
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:id="@+id/textView" />
-    <ActionMenuView
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_alignParentEnd="true">
-
-    </ActionMenuView>
-
+        android:layout_alignParentEnd="true"
+        textView.setTypeface(null, Typeface.BOLD);/>
+-->
 </RelativeLayout>
