@@ -8,8 +8,12 @@
 <<<<<<< HEAD
 =======
         <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.4" />
+<<<<<<< HEAD
+        <option name="gradleJvm" value="1.7" />
+=======
 >>>>>>> d3bbe0f6d84542c43729cc76779783becf7fd63e
         <option name="gradleJvm" value="1.8" />
+>>>>>>> c1b0c36f3cc3b9ffcb910591e30d3b7ea2c00275
         <option name="modules">
           <set>
             <option value="/u/data/u95/nathan/cs307/NewsLog-CS307/loginDemo" />
