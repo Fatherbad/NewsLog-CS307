@@ -34,7 +34,7 @@ public class CategoryActivity extends AppCompatActivity {
         sportsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //TODO:Add Category Tag
+                //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) sportsButton.getTag());
                 startActivity(intent);
@@ -45,7 +45,7 @@ public class CategoryActivity extends AppCompatActivity {
         politicsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //TODO: Add category tag
+                //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) politicsButton.getTag());
                 startActivity(intent);
@@ -56,7 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
         techButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //TODO: Add category tag
+                //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) techButton.getTag());
                 startActivity(intent);
@@ -67,7 +67,7 @@ public class CategoryActivity extends AppCompatActivity {
         scienceButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //TODO: Add category tag
+                //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) scienceButton.getTag());
                 startActivity(intent);
@@ -78,7 +78,7 @@ public class CategoryActivity extends AppCompatActivity {
         economyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //TODO: Add category tag
+                //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) economyButton.getTag());
                 startActivity(intent);
@@ -89,7 +89,7 @@ public class CategoryActivity extends AppCompatActivity {
         entertainmentButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //TODO: Add category tag
+                //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) entertainmentButton.getTag());
                 startActivity(intent);
