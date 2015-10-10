@@ -1,7 +1,5 @@
-/**
- * Created by mishamalik on 10/10/15.
- */
-public class Newslog {
+
+public class NewsLog {
 
 
     DBhandler db= new DBhandler();
@@ -13,7 +11,5 @@ public class Newslog {
 
 
     }
-
-
-
+	
 }

@@ -1,6 +1,7 @@
 package com.example.paul.demo;
 
 import android.support.v4.view.GestureDetectorCompat;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -23,7 +24,8 @@ public class NewsActivity extends AppCompatActivity {
     private float x1, x2, y1, y2;
     private WebView webView;
 
-
+    private String category;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,14 @@ public class NewsActivity extends AppCompatActivity {
         });
     }
 
-    
+    @Override
+    public void onStart () {
+        super.onStart();
+        Intent intent = getIntent();
+        category = intent.getStringExtra("CATEGORY");
+        System.out.println(category);
+    }
+
     private class Callback extends WebViewClient {
 
         @Override

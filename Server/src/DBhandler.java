@@ -1,13 +1,6 @@
-/**
- * Created by mishamalik on 10/10/15.
- */
-import java.util.ArrayList;
-import java.util.List;
-
-
 
 public class DBhandler {
-    List<User> myList= new ArrayList<User>();
+	List<User> myList= new ArrayList<User>();
 
     User getUser(String email)
     {
@@ -34,8 +27,6 @@ public class DBhandler {
         return null;
 
     }
-
-
 
 
 
