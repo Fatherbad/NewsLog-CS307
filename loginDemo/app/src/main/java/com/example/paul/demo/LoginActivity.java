@@ -26,6 +26,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import android.content.Intent;
+
+import com.example.paul.demo.CategoryActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -142,10 +146,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+            changeView();
         }
+    }
+
+    public void changeView () {
+        Intent intent = new Intent (LoginActivity.this, CategoryActivity.class);
+        showProgress(false);
+        startActivity(intent);
     }
 
     private boolean isEmailValid(String email) {
