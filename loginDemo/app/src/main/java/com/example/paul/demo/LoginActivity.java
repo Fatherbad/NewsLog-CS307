@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    public void sendMessage()
+    public void sendMessage(){}
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
