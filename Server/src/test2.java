@@ -1,23 +1,18 @@
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.*;
-import java.nio.charset.Charset;
-import org.apache.*;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+@SuppressWarnings("deprecation")
 public class test2 {
 
 
@@ -25,7 +20,7 @@ public class test2 {
 	public static void main(String[] args) throws IOException, JSONException {
 		  String baseURL = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
 		  String key = "289faf26a7b20d69a77b43935f70e358:17:72997005"; 
-		  String word = "apple+technology"; 
+		  String word = "technology"; 
 		  String req = baseURL + "?q=" + word + "&page=2&sort=newest&api-key=" + key;
 		 // String req1 = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=new+york&page=2&sort=newest&api-key=7497304579b17294fa0ffbe3f028b7ef:5:72997005";
 		 
