@@ -16,6 +16,8 @@ import android.widget.TextView;
  */
 public class CategoryActivity extends AppCompatActivity {
 
+    public static final String CATEGORY = "com.example.paul.demo.CATEGORY";
+
     public Button sportsButton;
     public Button politicsButton;
     public Button techButton;
@@ -34,6 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO:Add Category Tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
+                intent.putExtra((String) sportsButton.getTag(), CATEGORY);
                 startActivity(intent);
             }
         });
@@ -44,6 +47,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
+                intent.putExtra((String)politicsButton.getTag(), CATEGORY);
                 startActivity(intent);
             }
         });
@@ -54,6 +58,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
+                intent.putExtra((String)techButton.getTag(), CATEGORY);
                 startActivity(intent);
             }
         });
@@ -64,6 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
+                intent.putExtra((String)scienceButton.getTag(), CATEGORY);
                 startActivity(intent);
             }
         });
@@ -74,6 +80,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
+                intent.putExtra((String)economyButton.getTag(), CATEGORY);
                 startActivity(intent);
             }
         });
@@ -84,6 +91,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //TODO: Add category tag
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
+                intent.putExtra((String)sportsButton.getTag(), CATEGORY);
                 startActivity(intent);
             }
         });
