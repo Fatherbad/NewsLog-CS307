@@ -15,7 +15,7 @@
         android:background="@color/material_blue_grey_900"
         android:text="Sports"
         android:tag="@string/sports"
-        android:textColor="@color/White"/>
+        android:textColor="@color/White" />
 
     <Button
         android:id="@+id/PoliticsButton"
@@ -27,7 +27,7 @@
         android:layout_alignParentEnd="true"
         android:text="Politics"
         android:tag="@string/politics"
-        android:textColor="@color/White"/>
+        android:textColor="@color/White" />
 
     <Button
         android:id="@+id/TechButton"
@@ -79,4 +79,13 @@
         android:layout_alignTop="@+id/EconomyButton"
         android:layout_alignStart="@+id/ScienceButton" />
 
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/TechButton"
+        android:paddingBottom="30dp">
+    </LinearLayout>
+    -->
 </RelativeLayout>

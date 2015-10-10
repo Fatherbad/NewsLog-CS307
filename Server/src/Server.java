@@ -9,7 +9,7 @@ public class Server extends Thread {
     private int portNumber;
     private boolean running;
     private ServerSocket serverSocket;
-    private ArrayList<UserManager> connectedUsers;
+//    private ArrayList<UserManager> connectedUsers;
 
     public Server ( int portNumber ) {
 	this.portNumber = portNumber;
@@ -34,7 +34,7 @@ public class Server extends Thread {
 		//create client socket... the method accept() listens for a connection to be made to this socket and accepts it.
 		Socket client = serverSocket.accept();
 
-		UserManager userManager = new UserManager( client, this );
+		UserManager userManager = new UserManager( client );
 
 		connectedUsers.add(userManager);
 
