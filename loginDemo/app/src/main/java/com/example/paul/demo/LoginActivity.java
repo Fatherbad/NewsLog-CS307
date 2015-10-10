@@ -150,11 +150,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+<<<<<<< HEAD
+    public void sendMessage(){}
+=======
     public void changeView () {
         Intent intent = new Intent (LoginActivity.this, CategoryActivity.class);
         showProgress(false);
         startActivity(intent);
     }
+>>>>>>> origin/master
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
