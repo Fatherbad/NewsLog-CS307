@@ -6,4 +6,6 @@
     <!--Category Activity Dimensions -->
     <dimen name="category_button_width">120dp</dimen>
     <dimen name="category_button_height">100dp</dimen>
+    <dimen name="category_button_margin_horizontal">0dp</dimen>
+    <dimen name="category_button_margin_vertical">0dp</dimen>
 </resources>
