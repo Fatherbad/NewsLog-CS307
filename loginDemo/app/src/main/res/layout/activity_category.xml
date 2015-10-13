@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="30dp"
-    android:paddingBottom="30dp"
+
     android:background="@color/NavajoWhite"
     android:orientation="vertical">
 
@@ -15,11 +14,17 @@
         android:id="@+id/UpperLayout"
         android:layout_weight="0.33">
 
+        <!--
+
+        android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    -->
+
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/SportsButton"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="@dimen/category_button_margin"
             android:layout_weight="0.5"
             android:background="@color/material_blue_grey_900"
             android:text="Sports"
@@ -31,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/PoliticsButton"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="@dimen/category_button_margin"
             android:layout_weight="0.5"
             android:background="@color/DarkRed"
             android:text="Politics"
@@ -53,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/TechButton"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="@dimen/category_button_margin"
             android:layout_weight="0.5"
             android:background="@color/DarkOrange"
             android:text="Tech"
@@ -65,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/ScienceButton"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="@dimen/category_button_margin"
             android:layout_weight="0.5"
             android:background="@color/ForestGreen"
             android:text="Science"
@@ -88,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/EconomyButton"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="@dimen/category_button_margin"
             android:layout_weight="0.5"
             android:background="@color/DodgerBlue"
             android:text="Economy"
@@ -100,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/EntertainmentButton"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="@dimen/category_button_margin"
             android:layout_weight="0.5"
             android:background="@color/DarkOrchid"
             android:text="Entertainment"
