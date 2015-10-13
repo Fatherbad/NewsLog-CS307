@@ -105,7 +105,7 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
             focusView = mPasswordView;
             cancel = true;
         }
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !isCurrentPassword(password)) {
             //NEED TO IMPLEMENT A GET REQUEST TO DATABASE
             mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
@@ -125,6 +125,11 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
 
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
+    }
+
+    private boolean isCurrentPassword(String password){
+        //TODO:Check current user password
+        return true;
     }
 
     private void changePassword(){
