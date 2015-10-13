@@ -23,7 +23,7 @@
             android:layout_weight="0.5"
             android:background="@color/material_blue_grey_900"
             android:text="Sports"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:tag="@string/sports"
             android:textColor="@color/White"/>
 
@@ -35,7 +35,7 @@
             android:layout_weight="0.5"
             android:background="@color/DarkRed"
             android:text="Politics"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:tag="@string/politics"
             android:textColor="@color/White"/>
 
@@ -57,7 +57,7 @@
             android:layout_weight="0.5"
             android:background="@color/DarkOrange"
             android:text="Tech"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:tag="@string/tech"
             android:textColor="@color/White"/>
 
@@ -69,7 +69,7 @@
             android:layout_weight="0.5"
             android:background="@color/ForestGreen"
             android:text="Science"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:tag="@string/science"
             android:textColor="@color/White"/>
 
@@ -81,6 +81,7 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_below="@+id/MiddleLayout"
+        android:id="@+id/LowerLayout"
         android:layout_weight="0.33">
 
         <Button
@@ -91,7 +92,7 @@
             android:layout_weight="0.5"
             android:background="@color/DodgerBlue"
             android:text="Economy"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:tag="@string/economy"
             android:textColor="@color/White"/>
 
