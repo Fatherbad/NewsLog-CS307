@@ -44,26 +44,24 @@
         android:layout_height="wrap_content"
         android:text="@string/Chng_Pass"
         android:id="@+id/change_pass"
-        android:layout_weight="0.10"
         android:textColor="@color/White"/>
+
 
     <Button
         android:background="@color/LightSeaGreen"
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Reset_Interests"
         android:id="@+id/reset_interests"
-        android:layout_weight="0.10"
+        android:layout_marginTop="30dp"
         android:textColor="@color/White"/>
+
     <Button
-        android:background="@color/LightSeaGreen"
-        android:layout_marginTop="15dp"
+        android:background="@color/Red"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Delete_Acct"
         android:id="@+id/delete_act"
-        android:layout_weight="0.10"
         android:textColor="@color/White"/>
-
 </LinearLayout>
