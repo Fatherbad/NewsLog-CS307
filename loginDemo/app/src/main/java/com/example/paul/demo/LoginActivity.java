@@ -325,9 +325,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 userInfo.put("password", mPassword);
 
                 String info = userInfo.toString();
-
+                System.out.println(info);
+                
                 //Write userInfo to server and close the OutputStream
-                os.writeChars(info);
+                os.writeObject(info);
                 os.close();
 
                 /*
