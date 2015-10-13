@@ -36,6 +36,9 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.io.*;
 import java.net.*;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.*;
 
 
@@ -312,17 +315,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 // Simulate network access.
 
-                sock = new Socket("10.0.2.2", 4444);
+                sock = new Socket("data.cs.purdue.edu", 4444);
+                ObjectOutputStream os = new ObjectOutputStream(sock.getOutputStream());
+
+
+                //Create JSON object containing the needed user info
+                JSONObject userInfo = new JSONObject();
+                userInfo.put("email", mEmail);
+                userInfo.put("password", mPassword);
+
+                String info = userInfo.toString();
+                System.out.println(info);
+                
+                //Write userInfo to server and close the OutputStream
+                os.writeObject(info);
+                os.close();
+
+                /*
                 InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
                 reader = new BufferedReader(streamReader);
                 writer = new PrintWriter(sock.getOutputStream());
                 writer.println("HI SERVER this is PHONE");
                 writer.close();
+                */
+
                 //Thread.sleep(2000);
             }  catch (UnknownHostException ex) {
                 ex.printStackTrace();
             } catch (IOException ex) {
                 ex.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
             // TODO: register the new account here.
