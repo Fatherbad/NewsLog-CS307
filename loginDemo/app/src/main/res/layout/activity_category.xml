@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/category_button_margin_vertical"
+    android:paddingTop="@dimen/category_button_margin_vertical"
+    android:background="@color/NavajoWhite"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:id="@+id/UpperLayout"
+        android:layout_weight="0.33">
+
+        <!--
+
+        android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    -->
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/SportsButton"
+            android:layout_marginLeft="@dimen/category_button_margin_horizontal"
+            android:layout_weight="0.5"
+            android:background="@color/material_blue_grey_900"
+            android:text="Sports"
+            android:textSize="15dp"
+            android:tag="@string/sports"
+            android:textColor="@color/White"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/PoliticsButton"
+            android:layout_marginRight="@dimen/category_button_margin_horizontal"
+            android:layout_weight="0.5"
+            android:background="@color/DarkRed"
+            android:text="Politics"
+            android:textSize="15dp"
+            android:tag="@string/politics"
+            android:textColor="@color/White"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:id="@+id/MiddleLayout"
+        android:layout_below="@+id/UpperLayout"
+        android:layout_weight="0.33">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/TechButton"
+            android:layout_marginLeft="@dimen/category_button_margin_horizontal"
+            android:layout_weight="0.5"
+            android:background="@color/DarkOrange"
+            android:text="Tech"
+            android:textSize="15dp"
+            android:tag="@string/tech"
+            android:textColor="@color/White"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/ScienceButton"
+            android:layout_marginRight="@dimen/category_button_margin_horizontal"
+            android:layout_weight="0.5"
+            android:background="@color/ForestGreen"
+            android:text="Science"
+            android:textSize="15dp"
+            android:tag="@string/science"
+            android:textColor="@color/White"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/MiddleLayout"
+        android:id="@+id/LowerLayout"
+        android:layout_weight="0.33">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/EconomyButton"
+            android:layout_marginLeft="@dimen/category_button_margin_horizontal"
+            android:layout_weight="0.5"
+            android:background="@color/DodgerBlue"
+            android:text="Economy"
+            android:textSize="15dp"
+            android:tag="@string/economy"
+            android:textColor="@color/White"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/EntertainmentButton"
+            android:layout_marginRight="@dimen/category_button_margin_horizontal"
+            android:layout_weight="0.5"
+            android:background="@color/DarkOrchid"
+            android:text="Entertainment"
+            android:textSize="15dp"
+            android:tag="@string/entertainment"
+            android:textColor="@color/White"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+    <!--
     <Button
         android:id="@+id/SportsButton"
         android:layout_width="@dimen/category_button_width"
@@ -78,14 +197,4 @@
         android:textColor="@color/White"
         android:layout_alignTop="@+id/EconomyButton"
         android:layout_alignStart="@+id/ScienceButton" />
-
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal"
-        android:layout_below="@+id/TechButton"
-        android:paddingBottom="30dp">
-    </LinearLayout>
-    -->
-</RelativeLayout>
+-->

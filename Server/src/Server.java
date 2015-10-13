@@ -1,6 +1,9 @@
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.*;
+import java.net.*;
+import java.io.*;
 
 // Some code taken from
 // https://github.com/CatalinPrata/funcodetuts/blob/master/JavaTCPServer/src/ro/kazy/tcp/TcpServer.java
@@ -9,9 +12,11 @@ public class Server extends Thread {
     private int portNumber;
     private boolean running;
     private ServerSocket serverSocket;
-//    private ArrayList<UserManager> connectedUsers;
+
+    private ArrayList<UserManager> connectedUsers;
 
     public Server ( int portNumber ) {
+	connectedUsers = new ArrayList<UserManager>();
 	this.portNumber = portNumber;
 	running = false;
     }
@@ -38,7 +43,7 @@ public class Server extends Thread {
 
 		connectedUsers.add(userManager);
 
-		userManager.start();
+		(new Thread(userManager)).start();
 
 		System.out.println("Server: New client connected ...");
 	    }

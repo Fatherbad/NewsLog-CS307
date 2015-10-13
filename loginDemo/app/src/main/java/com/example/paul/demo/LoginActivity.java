@@ -34,11 +34,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 
 /**
  * A login screen that offers login via email/password.
  */
+
+class SendMessage implements Runnable {
+
+    public void run() {
+        send();
+    }
+    public void send() {
+        String message = "HI SERVER";
+        try {
+            Socket socket = new Socket("10.0.2.2", 4444);
+            PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+            printWriter.write("HELLO SERVER I MISS YOU");
+            printWriter.close();
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
+}
+
+
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
@@ -52,6 +73,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
+    private Socket sock;
+    private BufferedReader reader;
+    private PrintWriter writer;
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -146,10 +171,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+           //mAuthTask.doInBackground(email, password);
+           // Thread t1 = new Thread(new SendMessage());
+           /// t1.start();
+            UserLoginTask task = new UserLoginTask(email, password);
+            task.execute();
+            try {
+                task.get();
+            } catch (Exception ex) {ex.printStackTrace();}
             changeView();
         }
     }
-
 
     public void changeView () {
         Intent intent = new Intent (LoginActivity.this, CategoryActivity.class);
@@ -274,22 +306,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Boolean doInBackground(Void...params) {
             // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
+                sock = new Socket("10.0.2.2", 4444);
+                InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
+                reader = new BufferedReader(streamReader);
+                writer = new PrintWriter(sock.getOutputStream());
+                writer.println("HI SERVER this is PHONE");
+                writer.close();
+                //Thread.sleep(2000);
+            }  catch (UnknownHostException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
 
             // TODO: register the new account here.
