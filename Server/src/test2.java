@@ -2,13 +2,29 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -62,18 +78,28 @@ public class test2  {
 		  }
 		  //System.out.println(count);
 		 i = 0;
-		 System.out.println(array.length);
+		 
+		 ///Fetching
+		
+		
+		 //nameValuePairs.add(new BasicNameValuePair("urlToSearch","http://url.com/1"));
+		
+	  //HttpEntity entity = response.getEntity();
+		 //response.s
+		 //String result = EntityUtils.toString(entity);
+		 //System.out.println("rrrrrrrrrr"+result);
+		 i = 0;
+		 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		 while( array[i] != null){
+			
+			update(array[i].getURL(),array[i].getType(),nameValuePairs);
 			System.out.println(array[i].getType()); 
 			System.out.println(array[i].getURL());
-			System.out.println(i);
+			//System.out.println(i);
 			i++;
 			
 		 }
 		 
-		  
-		 
-
 	  }
 	
 	 static int fetch(String req, Obj [] array,String type,int i) throws ClientProtocolException, IOException, JSONException{
@@ -108,5 +134,21 @@ public class test2  {
 		  
 		  
 		 return ij;
+	 }
+	 
+	 static void update (String url,String catogory, ArrayList<NameValuePair> nameValuePairs) throws ClientProtocolException, IOException{
+		
+		 nameValuePairs.add(new BasicNameValuePair("url", url));	 
+		 nameValuePairs.add(new BasicNameValuePair("category", catogory));
+
+		 //System.out.println(array.length);
+		 HttpParams httpParameters = new BasicHttpParams();
+		 HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
+		 HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
+		 HttpClient httpclient = new DefaultHttpClient(httpParameters);
+		 //HttpPost httppost = new HttpPost("http://10.184.218.69/newslog/serviceSetArticles.php");
+		 HttpPost httppost = new HttpPost("http://10.184.218.69/newslog/serviceSetArticles.php");
+		 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		 HttpResponse response = httpclient.execute(httppost);
 	 }
 }
