@@ -81,7 +81,7 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
     }
     private void attemptPassChange() {
 
-        // Reset errors.
+        // Password reset errors.
         mNewPasswordView.setError(null);
         mNewPasswordView2.setError(null);
         mPasswordView.setError(null);
@@ -113,12 +113,10 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            //Print error messages
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            //Change user password
             changePassword();
         }
     }
