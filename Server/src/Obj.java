@@ -3,11 +3,12 @@ public class Obj {
 	 
 	       private String url ;
 	       private String type;
-	       
+	       private String key;
 	   // constructor
-	   public Obj(String url, String type) {
+	   public Obj(String url, String type,String key) {
 	      this.url = url;
 	      this.type = type;
+	      this.key = key;
 	   }
 
 	       // getter
@@ -17,6 +18,9 @@ public class Obj {
 	       public String getType() { 
 	    	   return type; 
 	    	   }
+	       public String getKey(){
+	    	   return key;
+	       }
 	       // setter
 
 	       public void setURL(String url) {
@@ -24,6 +28,9 @@ public class Obj {
 	       }
 	       public void setType(String type) { 
 	    	   this.type = type; 
+	       }
+	       public void setKey(String key){
+	    	   this.key = key;
 	       }
 	    
 }
