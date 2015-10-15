@@ -40,10 +40,11 @@ public class DBfetch {
 		 
 	}
 	
-	static void update (String user) throws ClientProtocolException, IOException{
+	static void update (String user, String password) throws ClientProtocolException, IOException{
 	
 		 ArrayList<NameValuePair> nameValuePairs =  new ArrayList<NameValuePair>();
-		 nameValuePairs.add(new BasicNameValuePair("user", user));	 
+		 nameValuePairs.add(new BasicNameValuePair("username", user));	
+		 nameValuePairs.add(new BasicNameValuePair("password", password));
 		 HttpParams httpParameters = new BasicHttpParams();
 		 HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
 		 HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
