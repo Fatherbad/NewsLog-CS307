@@ -29,13 +29,12 @@ public class DBfetch {
 	HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
 	HttpConnectionParams.setSoTimeout(httpParameters, 15000);  
 	HttpClient httpclient = new DefaultHttpClient(httpParameters);
-	HttpPost httppost = new HttpPost("http://10.184.223.128/newslog/serviceGetArticles.php");
+	HttpPost httppost = new HttpPost("http://10.184.212.160/newslog/serviceGetArticles.php");
 	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	HttpResponse response = httpclient.execute(httppost);
 	HttpEntity entity = response.getEntity();
 	String result = EntityUtils.toString(entity);
 	JSONArray ret = new JSONArray(result);
-	System.out.println("rrrrrrrrrr" + result);
 	return ret;
 
     }
@@ -49,9 +48,8 @@ public class DBfetch {
 	HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
 	HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
 	HttpClient httpclient = new DefaultHttpClient(httpParameters);
-	HttpPost httppost = new HttpPost("http://10.184.223.128/newslog/serviceSetUser.php");
+	HttpPost httppost = new HttpPost("http://10.184.212.160/newslog/serviceSetUser.php");
 	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	HttpResponse response = httpclient.execute(httppost);
-	System.out.println("serverris workinddddddddddd");
     }
 }
