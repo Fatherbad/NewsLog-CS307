@@ -48,6 +48,7 @@ import java.util.*;
 
 class SendMessage implements Runnable {
 
+
     public void run() {
         send();
     }
@@ -69,6 +70,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
+
+    public static final String EMAIL = "EMAIL";
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -189,6 +192,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void changeView () {
         Intent intent = new Intent (LoginActivity.this, CategoryActivity.class);
         showProgress(false);
+        intent.putExtra(EMAIL, mEmailView.getText());
         startActivity(intent);
     }
 
@@ -326,7 +330,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 String info = userInfo.toString();
                 System.out.println(info);
-                
+
                 //Write userInfo to server and close the OutputStream
                 os.writeObject(info);
                 os.close();

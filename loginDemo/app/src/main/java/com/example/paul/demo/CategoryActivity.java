@@ -17,6 +17,9 @@ import android.widget.TextView;
 public class CategoryActivity extends AppCompatActivity {
 
     public static final String CATEGORY = "CATEGORY";
+    public static final String EMAIL ="EMAIL";
+
+    String email;
 
     public Button sportsButton;
     public Button politicsButton;
@@ -59,6 +62,7 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) techButton.getTag());
+
                 startActivity(intent);
             }
         });
@@ -92,9 +96,17 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) entertainmentButton.getTag());
+                intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onStart () {
+        super.onStart();
+        Intent intent = getIntent();
+        email = intent.getStringExtra("CATEGORY");
     }
 }
 
