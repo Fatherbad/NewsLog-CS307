@@ -14,47 +14,38 @@ import org.json.*;
 
 
 public class UserManager implements Runnable{
-    Socket socket;
-    User user;
-    //ObjectOutputStream objectOutputStream;
-    InputStreamReader is;
-    
+    private Socket socket;
+    private User user;
+    private InputStreamReader inputStreamReader;
+    private BufferedReader bufferedReader;
 
-    public UserManager(Socket clientSocket ){
+    public UserManager( Socket clientSocket ){
 	try {
-	    this.socket=clientSocket;
-	    //objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-	    is = new InputStreamReader(socket.getInputStream() );
-	    user=new User();
+	    this.socket = clientSocket;
+	    inputStreamReader = new InputStreamReader( clientSocket.getInputStream() ); 
+	    bufferedReader = new BufferedReader ( inputStreamReader );
 	} catch ( Exception ex ) {
 	    ex.printStackTrace();
 	}
-
-
     }
 
     public void run() {
-	//String message;
-	JSONObject jsonObject = new JSONObject();	
-	String userInfo;
-	BufferedReader bf = new BufferedReader(is);
+	JSONObject jsonRequest; 
+	String request;
 	try {
-	    while ( (userInfo =  bf.readLine() ) != null) {
-		System.out.println(userInfo);
-		userInfo = userInfo.substring(userInfo.indexOf('{'),userInfo.length());
-		System.out.println(userInfo);
-//		System.out.println("READ " + userInfo);
-		//jsonObject = new JSONObject(userInfo);
-		//System.out.println("read" + jsonObject.get("email"));
+	    while ( (request = bufferedReader.readLine() ) != null) {
+		System.out.println( "Received request: " + request );
+		try {
+		    jsonRequest = new JSONObject( request );
+		    System.out.println("Created JSON object: " + jsonRequest.get("email"));
+		} catch ( JSONException ex ) {
+		    ex.printStackTrace();
+		}
 	    }
-	    //while ( (jsObject = objectInputStream.readObject() ) != null) {
-//		System.out.println("read" + jsObject.getString("email");
-//	    }
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	} 
-
-
+    }
 	/*
 	   public  boolean userLogin(String email,String password, DBhandler db)
 	   {
@@ -77,5 +68,4 @@ public class UserManager implements Runnable{
 	return true;
 	}
 	*/
-    }
 }
