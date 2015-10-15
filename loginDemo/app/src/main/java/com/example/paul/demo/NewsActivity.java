@@ -52,18 +52,6 @@ public class NewsActivity extends AppCompatActivity {
     private Socket sock = com.example.paul.demo.SocketHandler.getSocket();
     private GetNews getNews;
 
-
-    /*@Override
-    public void onStart () {
-        super.onStart();
-        Intent intent = getIntent();
-        category = intent.getStringExtra("CATEGORY");
-        email = intent.getStringExtra("EMAIL");
-        System.out.println("~~~~~~~~~~~~~ AHHHHHHHHHHHHHHHH" + category);
-        System.out.println("~~~~~~~~~~~~~ SQUIIID   " + email);
-
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
