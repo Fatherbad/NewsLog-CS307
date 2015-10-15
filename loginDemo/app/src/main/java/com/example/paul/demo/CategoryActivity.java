@@ -63,7 +63,7 @@ public class CategoryActivity extends AppCompatActivity {
                 // Perform action on click
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
-                intent.putExtra(CATEGORY, "technology");
+                intent.putExtra(CATEGORY, (String) techButton.getTag());
                 intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
