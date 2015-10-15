@@ -32,6 +32,7 @@ import com.example.paul.demo.CategoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.SocketHandler;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.io.*;
@@ -45,23 +46,6 @@ import java.util.*;
 /**
  * A login screen that offers login via email/password.
  */
-
-class SendMessage implements Runnable {
-
-
-    public void run() {
-        send();
-    }
-    public void send() {
-        String message = "HI SERVER";
-        try {
-            Socket socket = new Socket("10.0.2.2", 4444);
-            PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
-            printWriter.write("HELLO SERVER I MISS YOU");
-            printWriter.close();
-        } catch (Exception ex) { ex.printStackTrace(); }
-    }
-}
 
 
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
@@ -83,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private Socket sock;
     private BufferedReader reader;
     private PrintWriter writer;
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -320,7 +305,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Simulate network access.
 
                 sock = new Socket("data.cs.purdue.edu", 4444);
-                ObjectOutputStream os = new ObjectOutputStream(sock.getOutputStream());
+                com.example.paul.demo.SocketHandler.setSocket(sock);
+                PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                //ObjectOutputStream os = new ObjectOutputStream(sock.getOutputStream());
 
 
                 //Create JSON object containing the needed user info
@@ -329,11 +316,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 userInfo.put("password", mPassword);
 
                 String info = userInfo.toString();
-                System.out.println(info);
+                System.out.println("~~~~~~~~~~~~~~~~~ASDFASDF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + info);
 
                 //Write userInfo to server and close the OutputStream
-                os.writeObject(info);
-                os.close();
+                writer.println(userInfo);
+                //os.writeObject(userInfo);
+                writer.flush();
+                //writer.close();
 
                 /*
                 InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
