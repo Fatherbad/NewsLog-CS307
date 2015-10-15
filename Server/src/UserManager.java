@@ -1,4 +1,5 @@
 import jdk.nashorn.api.scripting.JSObject;
+import org.apache.http.NameValuePair;
 
 import java.awt.List;
 import java.io.*;
@@ -23,9 +24,9 @@ public class UserManager implements Runnable{
     public UserManager( Socket clientSocket ){
 	try {
 	    this.socket = clientSocket;
-	    inputStreamReader = new InputStreamReader( clientSocket.getInputStream() ); 
+	    inputStreamReader = new InputStreamReader( socket.getInputStream() ); 
 	    bufferedReader = new BufferedReader ( inputStreamReader );
-	    dbetch = new DBfetch();
+	    dbfetch = new DBfetch();
 	} catch ( Exception ex ) {
 	    ex.printStackTrace();
 	}
@@ -34,14 +35,29 @@ public class UserManager implements Runnable{
     public void run() {
 	JSONObject jsonRequest; 
 	String request;
+	ArrayList <NameValuePair> nameValuePairs = new ArrayList <NameValuePair>();	
+	ArrayList <NameValuePair> nameValue = new ArrayList <NameValuePair>();
 	try {
 	    while ( (request = bufferedReader.readLine() ) != null) {
 		System.out.println( "Received request: " + request );
 		try {
 		    jsonRequest = new JSONObject(request);
-		    System.out.println("Created JSON object: " + jsonRequest.get("email"));
-		    if ( jsonRequest.get("email") != null && jsonRequest.get("password") != null) {
-			dbfetch.update( jsonRequest.get("email"), jsonRequest.get("password") );	
+		    //System.out.println("Created JSON object: " + jsonRequest.get("email"));
+		    if ( request.contains("email") == true && jsonRequest.get("email") != null && jsonRequest.get("password") != null) {
+			String email = (String) jsonRequest.get("email");
+			String pw = (String) jsonRequest.get("password");
+			dbfetch.update( email, pw ,nameValuePairs);	
+		    }
+		    else {
+			JSONArray array;
+			String category = (String) jsonRequest.get("category");
+			array = dbfetch.get( category, nameValue );
+			JSONObject n  = (JSONObject) array.get(0);
+			System.out.println(n.get("url"));
+			PrintWriter writer = new PrintWriter( socket.getOutputStream() );
+			writer.println( n.get("url") );
+			writer.flush();
+			//dbfetch.update( email, pw ,nameValuePairs);	
 		    }
 
 		} catch ( JSONException ex ) {
