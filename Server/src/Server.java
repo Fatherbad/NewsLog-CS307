@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import org.json.*;
 
-// Some code taken from
+// Some code based from
 // https://github.com/CatalinPrata/funcodetuts/blob/master/JavaTCPServer/src/ro/kazy/tcp/TcpServer.java
 
 public class Server extends Thread {
@@ -20,36 +21,28 @@ public class Server extends Thread {
 	this.portNumber = portNumber;
 	running = false;
     }
-
+    
     public void start() {
-	
 	running = true;
-
 	try {
-
-	    //create a server socket. A server socket waits for requests to come in over the network.
+	    //create a server socket. A server socket waits for requests to 
+	    //come in over the network.
 	    serverSocket = new ServerSocket(portNumber);
-
 	    while (running) {
-
-		// create a loop and get all the incoming connections and create users with them
-
+		// create a loop and get all the incoming connections and 
+		// create users with them
 		System.out.println("Server: Waiting for a client ...");
-
-		//create client socket... the method accept() listens for a connection to be made to this socket and accepts it.
+		//create client socket... the method accept() listens 
+		//for a connection to be made to this socket and accepts it.
 		Socket client = serverSocket.accept();
-
-		UserManager userManager = new UserManager( client );
-
+		UserManager userManager = new UserManager(client);
 		connectedUsers.add(userManager);
-
-		(new Thread(userManager)).start();
-
+		Thread t = new Thread( userManager );
+		t.start();
 		System.out.println("Server: New client connected ...");
 	    }
 
 	} catch (Exception e) {
-
 	    System.out.println("Server: Error");
 	    e.printStackTrace();
 	}
