@@ -40,6 +40,7 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) sportsButton.getTag());
+                intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });
@@ -51,6 +52,7 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) politicsButton.getTag());
+                intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });
@@ -62,7 +64,7 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) techButton.getTag());
-
+                intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });
@@ -74,6 +76,7 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) scienceButton.getTag());
+                intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });
@@ -85,6 +88,7 @@ public class CategoryActivity extends AppCompatActivity {
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) economyButton.getTag());
+                intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });

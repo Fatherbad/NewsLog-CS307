@@ -146,7 +146,7 @@ public class test2  {
 		 HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
 		 HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
 		 HttpClient httpclient = new DefaultHttpClient(httpParameters);
-		 HttpPost httppost = new HttpPost("http://10.184.218.69/newslog/serviceSetArticles.php");
+		 HttpPost httppost = new HttpPost("http://10.184.223.128/newslog/serviceSetArticles.php");
 		 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		 HttpResponse response = httpclient.execute(httppost);
 	 }

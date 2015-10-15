@@ -62,7 +62,7 @@
             android:layout_marginLeft="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
             android:background="@color/DarkOrange"
-            android:text="Tech"
+            android:text="Technology"
             android:textSize="15dp"
             android:tag="@string/tech"
             android:textColor="@color/White"/>
