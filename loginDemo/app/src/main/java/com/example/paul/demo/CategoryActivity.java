@@ -106,7 +106,7 @@ public class CategoryActivity extends AppCompatActivity {
     public void onStart () {
         super.onStart();
         Intent intent = getIntent();
-        email = intent.getStringExtra("CATEGORY");
+        email = intent.getStringExtra("EMAIL");
     }
 }
 
