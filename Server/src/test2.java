@@ -44,13 +44,13 @@ public class test2  {
 		  int i  = 0;
 		  String type = "";
 		  int count = 0;
-		 /* while(i < word.length){
+		  while(i < word.length){
 			  req = baseURL + "?q=" + word[i] + "&page=1&sort=newest&api-key=" + key;
 			  //  System.out.println(count);
 			  count = fetch(req,array,word[i],count);
 			 
 			  i++;
-		  }*
+		  }
 		  // String req1 = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=new+york&page=2&sort=newest&api-key=7497304579b17294fa0ffbe3f028b7ef:5:72997005";
 			  /*  i=0;
 		  while(i < word.length){
