@@ -52,7 +52,11 @@ public class UserManager implements Runnable{
 			JSONArray array;
 			String category = (String) jsonRequest.get("category");
 			array = dbfetch.get( category, nameValue );
-			JSONObject n  = (JSONObject) array.get(0);
+			int max = 0;
+			int min = 5;
+			int rand = (int) Math.floor(Math.random() * (max - min)) + min;
+			System.out.println("RANDOM: " + rand);
+			JSONObject n  = (JSONObject) array.get(rand);
 			System.out.println(n.get("url"));
 			PrintWriter writer = new PrintWriter( socket.getOutputStream() );
 			writer.println( n.get("url") );
