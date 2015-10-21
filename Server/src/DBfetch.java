@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class DBfetch {
-<<<<<<< Updated upstream
 
 
     static  JSONArray get (String catogory,ArrayList <NameValuePair> nameValuePairs) throws ClientProtocolException, IOException, JSONException{
@@ -31,7 +30,7 @@ public class DBfetch {
 	HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
 	HttpConnectionParams.setSoTimeout(httpParameters, 15000);  
 	HttpClient httpclient = new DefaultHttpClient(httpParameters);
-	HttpPost httppost = new HttpPost("http://10.184.212.160/newslog/serviceGetArticles.php");
+	HttpPost httppost = new HttpPost("http://10.184.200.12/newslog/serviceGetArticles.php");
 	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	HttpResponse response = httpclient.execute(httppost);
 	HttpEntity entity = response.getEntity();
@@ -50,44 +49,9 @@ public class DBfetch {
 	HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
 	HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
 	HttpClient httpclient = new DefaultHttpClient(httpParameters);
-	HttpPost httppost = new HttpPost("http://10.184.212.160/newslog/serviceSetUser.php");
+	HttpPost httppost = new HttpPost("http://10.184.200.12/newslog/serviceSetUser.php");
 	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	HttpResponse response = httpclient.execute(httppost);
     }
-=======
 	
-	 static JSONArray get (String catogory,ArrayList<NameValuePair> nameValuePairs ) throws ClientProtocolException, IOException, JSONException{
-			
-			// ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			 nameValuePairs.add(new BasicNameValuePair("category", catogory));
-			 HttpParams httpParameters = new BasicHttpParams();
-			 HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
-			 HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
-			 HttpClient httpclient = new DefaultHttpClient(httpParameters);
-			 HttpPost httppost = new HttpPost("http://10.184.223.128/newslog/serviceGetArticles.php");
-			 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			 HttpResponse response = httpclient.execute(httppost);
-			 HttpEntity entity = response.getEntity();
-			 String result = EntityUtils.toString(entity);
-			 JSONArray ret = new JSONArray(result);
-			 System.out.println("rrrrrrrrrr" + ret);
-			 return ret;
-			 
-		}
-	
-	static void update (String user, String password) throws ClientProtocolException, IOException{
-	
-		 ArrayList<NameValuePair> nameValuePairs =  new ArrayList<NameValuePair>();
-		 nameValuePairs.add(new BasicNameValuePair("username", user));	
-		 nameValuePairs.add(new BasicNameValuePair("password", password));
-		 HttpParams httpParameters = new BasicHttpParams();
-		 HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
-		 HttpConnectionParams.setSoTimeout(httpParameters, 15000);	
-		 HttpClient httpclient = new DefaultHttpClient(httpParameters);
-		 HttpPost httppost = new HttpPost("http://10.184.223.128/newslog/serviceSetArticles.php");
-		 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		 HttpResponse response = httpclient.execute(httppost);
-	     
-	}
->>>>>>> Stashed changes
 }
