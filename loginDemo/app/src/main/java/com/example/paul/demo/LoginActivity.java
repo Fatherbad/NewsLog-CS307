@@ -291,10 +291,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private final String mRequest;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            mRequest = "login";
         }
 
         @Override
@@ -304,25 +306,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 // Simulate network access.
 
-                sock = new Socket("data.cs.purdue.edu", 4444);
+                sock = new Socket("45.55.61.229", 4444);
                 com.example.paul.demo.SocketHandler.setSocket(sock);
                 PrintWriter writer = new PrintWriter(sock.getOutputStream());
                 //ObjectOutputStream os = new ObjectOutputStream(sock.getOutputStream());
 
 
                 //Create JSON object containing the needed user info
-                JSONObject userInfo = new JSONObject();
-                userInfo.put("email", mEmail);
-                userInfo.put("password", mPassword);
+                JSONObject art = new JSONObject();
+                art.put("request", mRequest);
+                art.put("email", mEmail);
+                art.put("password", mPassword);
 
-                String info = userInfo.toString();
+                String info = art.toString();
                 System.out.println("~~~~~~~~~~~~~~~~~ASDFASDF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + info);
 
                 //Write userInfo to server and close the OutputStream
-                writer.println(userInfo);
+                writer.println(art);
                 //os.writeObject(userInfo);
                 writer.flush();
-                //writer.close();
+//                writer.close();
 
                 /*
                 InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());

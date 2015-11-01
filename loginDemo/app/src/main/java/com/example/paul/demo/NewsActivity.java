@@ -50,7 +50,7 @@ public class NewsActivity extends AppCompatActivity {
     private String category;
     private String email;
     private Socket sock = com.example.paul.demo.SocketHandler.getSocket();
-    private GetNews getNews;
+//    private GetNews getNews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +61,9 @@ public class NewsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_activity);
-
-        getNews = new GetNews(email,category.toLowerCase());
-        getNews.execute();
         try {
+            GetNews getNews = new GetNews(email, category.toLowerCase());
+            getNews.execute();
             getNews.get();
         } catch (Exception ex) {ex.printStackTrace();}
 
@@ -125,32 +124,37 @@ public class NewsActivity extends AppCompatActivity {
 
 
     public void onSwipeRight() {
-        /*getNews.execute();
         try {
+            GetNews getNews = new GetNews(email,category.toLowerCase());
+            getNews.execute();
             getNews.get();
         } catch (Exception ex) {ex.printStackTrace();}
-        */
-        webView.loadUrl(pageNextLiked);
+
+        webView.loadUrl(currPage);
 
     }
 
     public void onSwipeLeft() {
-       /* getNews.execute();
+
         try {
+            GetNews getNews = new GetNews(email,category.toLowerCase());
+            getNews.execute();
             getNews.get();
         } catch (Exception ex) {ex.printStackTrace();}
-        */
-        webView.loadUrl(pageNextDisliked);
+
+        webView.loadUrl(currPage);
     }
 
     public class GetNews extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mCategory;
+        private final String mRequest;
 
         GetNews(String email, String category) {
             mEmail = email;
             mCategory = category;
+            mRequest = "article";
         }
 
         @Override
@@ -159,10 +163,12 @@ public class NewsActivity extends AppCompatActivity {
 
             try {
                 // Simulate network access.
+//                sock = SocketHandler.getSocket();
                 PrintWriter writer = new PrintWriter(sock.getOutputStream());
                 //Create JSON object containing the needed user info
                 JSONObject newsInfo = new JSONObject();
-                //newsInfo.put("email", mEmail);
+                newsInfo.put("request", mRequest);
+                newsInfo.put("email", mEmail);
                 newsInfo.put("category", mCategory);
 
                 String info = newsInfo.toString();
@@ -171,17 +177,18 @@ public class NewsActivity extends AppCompatActivity {
                 //Write userInfo to server and close the OutputStream
                 writer.println(info);
                 writer.flush();
+//                writer.close();
 
                 InputStreamReader reader = new InputStreamReader(sock.getInputStream());
                 BufferedReader bfRead = new BufferedReader(reader);
                 String msg;
                 while((msg = bfRead.readLine()) != null){
                     currPage = msg;
-                    System.out.println(msg);
+//                    System.out.println(currPage);
 
                     break;
                 }
-                reader.close();
+ //               reader.close();
                 //ObjectInputStream news = new ObjectInputStream(sock.getInputStream());
 
             } catch (UnknownHostException ex) {
@@ -193,6 +200,8 @@ public class NewsActivity extends AppCompatActivity {
             }
             return true;
         }
+
+
     }
 
 /*
