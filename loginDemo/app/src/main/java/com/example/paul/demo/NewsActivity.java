@@ -32,6 +32,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 /**
  * Created by stephen on 10/10/15.
@@ -39,14 +40,18 @@ import java.net.UnknownHostException;
 public class NewsActivity extends AppCompatActivity {
 
     //NEED 3 NEWS PAGES --- KEEP IN MIND FOR DEV
-    private String pageNextLiked = "http://www.nytimes.com/2015/10/07/business/international/vw-diesel-emissions-job-cuts.html";
+    //private String pageLeft; //= "http://www.nytimes.com/2015/10/07/business/international/vw-diesel-emissions-job-cuts.html";
     private String currPage; //= "http://www.nytimes.com/2015/10/07/technology/the-hardware-side-of-microsoft-unveils-a-pile-of-new-devices.html";
-    private String pageNextDisliked = "http://www.nytimes.com/aponline/2015/10/06/world/asia/ap-as-skorea-earns-samsung-electronics-.html";
+    //private String pageRight; = "http://www.nytimes.com/aponline/2015/10/06/world/asia/ap-as-skorea-earns-samsung-electronics-.html";
 
+    private ArrayList<String> news = new ArrayList<String>();
     private GestureDetectorCompat mDetector;
     private static final float SWIPE_THRESHOLD = 200;
     private float x1, x2, dx, dy, y1, y2;
-    private WebView webView;
+    private WebView webView1;
+    private WebView webView2;
+    private WebView webView3;
+    private WebView[] webViews = new WebView[3];
     private String category;
     private String email;
     private Socket sock = com.example.paul.demo.SocketHandler.getSocket();
@@ -67,16 +72,45 @@ public class NewsActivity extends AppCompatActivity {
             getNews.get();
         } catch (Exception ex) {ex.printStackTrace();}
 
-        webView = (WebView) findViewById(R.id.webView1);
+        webView1 = (WebView) findViewById(R.id.webView1);
 
-        WebSettings webSettings = webView.getSettings();
+        WebSettings webSettings = webView1.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
 
-        webView.setWebViewClient(new Callback());
-        webView.loadUrl(currPage);
-        webView.canGoBack();
-        webView.setOnTouchListener(new View.OnTouchListener() {
+        webView1.setWebViewClient(new Callback());
+        webView1.loadUrl(currPage);
+        webView1.canGoBack();
+        setOnTouch(webView1);
+        webViews[1] = webView1;
+
+        webView2 = (WebView) findViewById(R.id.webView2);
+
+        WebSettings webSettings1 = webView2.getSettings();
+        webSettings1.setJavaScriptEnabled(true);
+
+
+        webView2.setWebViewClient(new Callback());
+        webView2.loadUrl(news.get(0));
+        news.remove(0);
+        webView2.canGoBack();
+        webViews[0] = webView2;
+
+        webView3 = (WebView) findViewById(R.id.webView3);
+
+        WebSettings webSettings2 = webView3.getSettings();
+        webSettings2.setJavaScriptEnabled(true);
+
+
+        webView3.setWebViewClient(new Callback());
+        webView3.loadUrl(news.get(0));
+        news.remove(0);
+        webView3.canGoBack();
+        webViews[2] = webView3;
+    }
+
+    private void setOnTouch(WebView w){
+        w.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -114,6 +148,16 @@ public class NewsActivity extends AppCompatActivity {
         });
     }
 
+    private void removeOnTouch(WebView w){
+        w.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //DoNothing
+                return true;
+            }
+        });
+    }
+
     private class Callback extends WebViewClient {
 
         @Override
@@ -124,25 +168,56 @@ public class NewsActivity extends AppCompatActivity {
 
 
     public void onSwipeRight() {
-        try {
-            GetNews getNews = new GetNews(email,category.toLowerCase());
-            getNews.execute();
-            getNews.get();
-        } catch (Exception ex) {ex.printStackTrace();}
 
-        webView.loadUrl(currPage);
+        removeOnTouch(webViews[1]);
+        webViews[1].setVisibility(View.GONE);
+        webViews[2].setVisibility(View.VISIBLE);
+        setOnTouch(webViews[2]);
 
+        if(!news.isEmpty()) {
+            currPage = news.get(0);
+            news.remove(0);
+        }else {
+            try {
+                GetNews getNews = new GetNews(email, category.toLowerCase());
+                getNews.execute();
+                getNews.get();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        webViews[1].loadUrl(currPage);
+        WebView temp = webViews[1];
+        webViews[1] = webViews[2];
+        webViews[2] = temp;
     }
 
     public void onSwipeLeft() {
 
-        try {
-            GetNews getNews = new GetNews(email,category.toLowerCase());
-            getNews.execute();
-            getNews.get();
-        } catch (Exception ex) {ex.printStackTrace();}
+        webViews[1].setVisibility(View.GONE);
+        webViews[0].setVisibility(View.VISIBLE);
+        removeOnTouch(webViews[1]);
+        setOnTouch(webViews[0]);
 
-        webView.loadUrl(currPage);
+        if(!news.isEmpty()) {
+            currPage = news.get(0);
+            news.remove(0);
+        }else{
+            try {
+                GetNews getNews = new GetNews(email,category.toLowerCase());
+                getNews.execute();
+                getNews.get();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        webViews[1].loadUrl(currPage);
+        WebView temp = webViews[1];
+        webViews[1] = webViews[0];
+        webViews[0] = temp;
+
     }
 
     public class GetNews extends AsyncTask<Void, Void, Boolean> {
@@ -159,7 +234,6 @@ public class NewsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
@@ -172,24 +246,23 @@ public class NewsActivity extends AppCompatActivity {
                 newsInfo.put("category", mCategory);
 
                 String info = newsInfo.toString();
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~ "+info+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-                //Write userInfo to server and close the OutputStream
                 writer.println(info);
                 writer.flush();
-//                writer.close();
 
                 InputStreamReader reader = new InputStreamReader(sock.getInputStream());
                 BufferedReader bfRead = new BufferedReader(reader);
                 String msg;
-                while((msg = bfRead.readLine()) != null){
-                    currPage = msg;
-//                    System.out.println(currPage);
 
-                    break;
+                //Edit limit on for loop to increase or decrease amount of files fed from server
+                for(int i = 0; i < 5; i++){
+                    msg = bfRead.readLine();
+
+                    if(!msg.contains("http")) break;
+                    news.add(msg);
+                    //break;
                 }
- //               reader.close();
-                //ObjectInputStream news = new ObjectInputStream(sock.getInputStream());
+                currPage = news.get(0);
+                news.remove(0);
 
             } catch (UnknownHostException ex) {
                 ex.printStackTrace();
@@ -200,8 +273,6 @@ public class NewsActivity extends AppCompatActivity {
             }
             return true;
         }
-
-
     }
 
 /*
