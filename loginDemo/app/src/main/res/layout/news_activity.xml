@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".NewsActivity">
 
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,9 +19,22 @@
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webView1">
+        android:id="@+id/webView1"
+        android:visibility="visible">
     </WebView>
 
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView2"
+        android:visibility="gone">
+    </WebView>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView3"
+        android:visibility="gone">
+    </WebView>
 
 
     <!--<TextView
@@ -33,6 +47,7 @@
 -->
 </FrameLayout>
 
+
     <ListView
         android:id="@+id/navList"
         android:layout_width="200dp"
@@ -41,3 +56,4 @@
         android:background="#ffeeeeee"/>
 
 </android.support.v4.widget.DrawerLayout>
+
