@@ -24,6 +24,7 @@
         android:id="@+id/webView3"
         android:visibility="gone">
     </WebView>
+
     <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -33,3 +34,4 @@
         textView.setTypeface(null, Typeface.BOLD);/>
 -->
 </FrameLayout>
+

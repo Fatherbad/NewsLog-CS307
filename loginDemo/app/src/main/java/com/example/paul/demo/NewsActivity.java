@@ -13,6 +13,8 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.os.Bundle;
@@ -46,7 +48,7 @@ public class NewsActivity extends AppCompatActivity {
 
     private ArrayList<String> news = new ArrayList<String>();
     private GestureDetectorCompat mDetector;
-    private static final float SWIPE_THRESHOLD = 200;
+    private static final float SWIPE_THRESHOLD = 100;
     private float x1, x2, dx, dy, y1, y2;
     private WebView webView1;
     private WebView webView2;
@@ -194,10 +196,11 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     public void onSwipeLeft() {
-
+       // animateR(webViews[1]);
+        removeOnTouch(webViews[1]);
         webViews[1].setVisibility(View.GONE);
         webViews[0].setVisibility(View.VISIBLE);
-        removeOnTouch(webViews[1]);
+        //animateL(webViews[0]);
         setOnTouch(webViews[0]);
 
         if(!news.isEmpty()) {
@@ -273,6 +276,16 @@ public class NewsActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+    private void animateL(final WebView view) {
+        Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
+                android.R.anim.slide_in_left);
+        view.startAnimation(anim);
+    }
+    private void animateR(final WebView view) {
+        Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
+                android.R.anim.slide_out_right);
+        view.startAnimation(anim);
     }
 
 /*
