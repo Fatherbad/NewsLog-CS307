@@ -1,15 +1,31 @@
 package com.example.paul.demo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.Socket;
 
 /**
  * Created by nathan on 10/10/15.
@@ -27,11 +43,16 @@ public class CategoryActivity extends AppCompatActivity {
     public Button scienceButton;
     public Button economyButton;
     public Button entertainmentButton;
+    public ListView mDrawerList;
+    public ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        addDrawerItems();
 
         sportsButton = (Button)findViewById(R.id.SportsButton);
         sportsButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +123,34 @@ public class CategoryActivity extends AppCompatActivity {
                 intent.putExtra(CATEGORY, (String) entertainmentButton.getTag());
                 intent.putExtra(EMAIL, email);
                 startActivity(intent);
+            }
+        });
+
+    }
+
+    private void addDrawerItems() {
+        String[] osArray = { "Manage Account", "Sign Out"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("--------HERE " + id + " ----------");
+                switch ((int)id) {
+                    case 0:
+                        Intent intent = new Intent(CategoryActivity.this, AccountManagementActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 1:
+                        com.example.paul.demo.SocketHandler.closeSocket();
+                        Intent i = new Intent(CategoryActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        break;
+                }
+//                This pops up a small dialog at the bottom of the screen
+//                Toast.makeText(CategoryActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
             }
         });
     }

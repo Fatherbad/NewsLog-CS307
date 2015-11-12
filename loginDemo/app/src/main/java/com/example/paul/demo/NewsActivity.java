@@ -2,8 +2,10 @@ package com.example.paul.demo;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Picture;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.view.GestureDetectorCompat;
 import android.content.Intent;
@@ -17,7 +19,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.os.Bundle;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import org.json.JSONException;
@@ -50,6 +55,8 @@ public class NewsActivity extends AppCompatActivity {
     private String category;
     private String email;
     private Socket sock = com.example.paul.demo.SocketHandler.getSocket();
+    public ListView mDrawerList;
+    public ArrayAdapter<String> mAdapter;
 //    private GetNews getNews;
 
     @Override
@@ -110,6 +117,43 @@ public class NewsActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
+            }
+        });
+
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        addDrawerItems();
+    }
+
+    private void addDrawerItems() {
+        String[] osArray = { "Select Category", "Manage Account", "Sign Out"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent;
+                switch ((int)id) {
+
+                    case 0:
+                        intent = new Intent(NewsActivity.this, CategoryActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 1:
+                        intent = new Intent(NewsActivity.this, AccountManagementActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 2:
+                        com.example.paul.demo.SocketHandler.closeSocket();
+                        intent = new Intent(NewsActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+//                This pops up a small dialog at the bottom of the screen
+//                Toast.makeText(CategoryActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -204,14 +248,39 @@ public class NewsActivity extends AppCompatActivity {
 
     }
 
+
+//UNCOMMENT WHEN READY TO ANIMATE SWIPE
 /*
-UNCOMMENT WHEN READY TO ANIMATE SWIPE
     private void animatePage(){
         //CREATE BITMAP ON PAGE
 
         System.out.println("~~~~~~~~HERERERE~~~~~~H: " + webView.getMeasuredHeight() + " ~~~~");
         Bitmap img = Bitmap.createBitmap(webView.getWidth(), webView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(img);
+
+        Drawable d = new Drawable() {
+            @Override
+            public void draw(Canvas canvas) {
+
+            }
+
+            @Override
+            public void setAlpha(int i) {
+
+            }
+
+            @Override
+            public void setColorFilter(ColorFilter colorFilter) {
+
+            }
+
+            @Override
+            public int getOpacity() {
+                return 0;
+            }
+        };
+
         webView.draw(canvas);
-    }*/
+    }
+    */
 }

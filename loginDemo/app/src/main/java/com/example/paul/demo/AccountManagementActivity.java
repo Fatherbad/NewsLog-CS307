@@ -1,6 +1,7 @@
 package com.example.paul.demo;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,9 +10,12 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.regex.Pattern;
@@ -26,6 +30,8 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
     private EditText mNewPasswordView;
     private EditText mNewPasswordView2;
     private EditText mPasswordView;
+    public ListView mDrawerList;
+    public ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,38 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
             @Override
             public void onClick(View view) {
                 deleteAccount();
+            }
+        });
+
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        addDrawerItems();
+    }
+
+    private void addDrawerItems() {
+        String[] osArray = { "Select Category", "Sign Out"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent;
+                switch ((int) id) {
+
+                    case 0:
+                        intent = new Intent(AccountManagementActivity.this, CategoryActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 1:
+                        com.example.paul.demo.SocketHandler.closeSocket();
+                        intent = new Intent(AccountManagementActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+//                This pops up a small dialog at the bottom of the screen
+//                Toast.makeText(CategoryActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
             }
         });
     }
