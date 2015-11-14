@@ -215,7 +215,12 @@ public class NewsActivity extends AppCompatActivity {
 
     public void onSwipeRight() {
 
+        animateL(webViews[1]);
         removeOnTouch(webViews[1]);
+        //try {
+        /*} catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         webViews[1].setVisibility(View.GONE);
         webViews[2].setVisibility(View.VISIBLE);
         setOnTouch(webViews[2]);
@@ -240,7 +245,11 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     public void onSwipeLeft() {
-       // animateR(webViews[1]);
+        //try {
+        /*} catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        animateR(webViews[1]);
         removeOnTouch(webViews[1]);
         webViews[1].setVisibility(View.GONE);
         webViews[0].setVisibility(View.VISIBLE);
@@ -299,15 +308,25 @@ public class NewsActivity extends AppCompatActivity {
                 InputStreamReader reader = new InputStreamReader(sock.getInputStream());
                 BufferedReader bfRead = new BufferedReader(reader);
                 String msg;
-
                 //Edit limit on for loop to increase or decrease amount of files fed from server
-                for(int i = 0; i < 5; i++){
-                    msg = bfRead.readLine();
+                //while(true) {
+                    //for (int i = 0; i < 20; i++) {
+                    while(true) {
 
-                    if(!msg.contains("http")) break;
-                    news.add(msg);
-                    //break;
-                }
+                        msg = bfRead.readLine();
+                        System.out.println("---------" + msg + "---------");
+
+                        if (msg.equals("end")) {
+                            System.out.println("LEFT THE THING ~~~~~~~~" + news.size() + "~~~~~~~~~~~");
+                            break;
+                        } else if (msg == null || !msg.contains("http")) {
+
+                        } else {
+                            System.out.println("ADDING: " + msg);
+                            news.add(msg);
+                        }
+                        //break;
+                    }
                 currPage = news.get(0);
                 news.remove(0);
 
@@ -325,13 +344,22 @@ public class NewsActivity extends AppCompatActivity {
         Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
                 android.R.anim.slide_in_left);
         view.startAnimation(anim);
+        /*try {
+            wait(100);
+        }catch(InterruptedException wt){
+
+        }*/
     }
     private void animateR(final WebView view) {
         Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
                 android.R.anim.slide_out_right);
         view.startAnimation(anim);
-    }
+        /*try {
+            wait(100);
+        }catch(InterruptedException wt){
 
+        }*/
+    }
 
 //UNCOMMENT WHEN READY TO ANIMATE SWIPE
 /*
