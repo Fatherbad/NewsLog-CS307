@@ -17,7 +17,8 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,17 +28,33 @@
 
         <activity
             android:name=".CategoryActivity"
-            android:label="@string/category_activity" >
+            android:label="@string/category_activity"
+            android:noHistory="true">
         </activity>
 
         <activity
-            android:name=".AccountManagementActivity"
+            android:name=".RegistrationActivity"
+            android:noHistory="true"
             android:label="@string/app_name" >
         </activity>
 
         <activity
+            android:name=".LoginDialogActivity"
             android:label="@string/app_name"
-            android:name=".NewsActivity">
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
+            android:noHistory="true">
+        </activity>
+
+        <activity
+            android:name=".AccountManagementActivity"
+            android:label="@string/app_name"
+            android:noHistory="true">
+        </activity>
+
+        <activity
+            android:label="@string/app_name"
+            android:name=".NewsActivity"
+            android:noHistory="true">
         </activity>
 
     </application>

@@ -52,7 +52,7 @@ import java.util.*;
  */
 
 
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class RegistrationActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -73,15 +73,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private PrintWriter writer;
     public AlertDialog.Builder alertBuild;
     public AlertDialog alertMessage;
-    private boolean success;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private UserRegisterTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -89,12 +88,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_registration);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailView = (EditText) findViewById(R.id.new_email);
+        mPasswordView = (EditText) findViewById(R.id.new_password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -106,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.register_user);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,24 +111,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-
-        Button registerUser = (Button) findViewById(R.id.go_to_register);
-        registerUser.setOnClickListener(new OnClickListener() {
+        Button backToLogin = (Button) findViewById(R.id.back_to_login);
+        backToLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (LoginActivity.this, RegistrationActivity.class);
-                showProgress(false);
+                Intent intent = new Intent (RegistrationActivity.this, LoginActivity.class);
+//                showProgress(false);
                 startActivity(intent);
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void populateAutoComplete() {
-        getLoaderManager().initLoader(0, null, this);
-    }
 
 
     /**
@@ -180,36 +171,48 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-           //mAuthTask.doInBackground(email, password);
-           // Thread t1 = new Thread(new SendMessage());
-           /// t1.start();
-            UserLoginTask task = new UserLoginTask(email, password, this);
-
+            //mAuthTask.doInBackground(email, password);
+            // Thread t1 = new Thread(new SendMessage());
+            /// t1.start();
+            UserRegisterTask task = new UserRegisterTask(email, password, this);
+            task.execute();
             try {
-                task.execute();
                 task.get();
             } catch (Exception ex) {ex.printStackTrace();}
-            if (task.response.toString().contains("success")) {
-                changeView();
-            } else {
-                Intent intent = new Intent(LoginActivity.this, LoginDialogActivity.class);
-                startActivity(intent);
-            }
+            changeView();
         }
     }
 
+
     public void changeView () {
-        Intent intent = new Intent (LoginActivity.this, CategoryActivity.class);
-        showProgress(false);
+        Intent intent = new Intent (RegistrationActivity.this, CategoryActivity.class);
         intent.putExtra(EMAIL, mEmailView.getText().toString());
         startActivity(intent);
+    }
+
+    public void invalidRegister () {
+        //TODO: Add activity to alert user and handle failed login
+        /*
+        alertBuild = new AlertDialog.Builder(LoginActivity.this);
+        alertBuild.setTitle("Login Failed");
+        alertBuild.setMessage("The submitted username and password is invalid.");
+        alertBuild.setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                showProgress(false);
+                startActivity(intent);
+            }
+        });
+        alertMessage = alertBuild.show();
+        */
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(email);
         return matcher.find();
-      //  return email.contains("@");
+        //  return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
@@ -217,9 +220,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return password.length() > 4;
     }
 
+
     /**
      * Shows the progress UI and hides the login form.
      */
+
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -279,7 +285,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cursor.moveToNext();
         }
 
-        addEmailsToAutoComplete(emails);
     }
 
     @Override
@@ -297,35 +302,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        mEmailView.setAdapter(adapter);
-    }
-
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
         private final String mRequest;
         private StringBuilder response;
-        private LoginActivity login;
+        private RegistrationActivity register;
 
 
-        UserLoginTask(String email, String password, LoginActivity log) {
+        UserRegisterTask(String email, String password, RegistrationActivity reg) {
             mEmail = email;
             mPassword = password;
-            mRequest = "login";
+            mRequest = "register";
             response = new StringBuilder();
-            login = log;
+            register = reg;
 
 
         }
@@ -336,9 +331,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
+
                 sock = new Socket("45.55.61.229", 4444);
                 com.example.paul.demo.SocketHandler.setSocket(sock);
-
                 PrintWriter writer = new PrintWriter(sock.getOutputStream());
                 //ObjectOutputStream os = new ObjectOutputStream(sock.getOutputStream());
 
@@ -349,12 +344,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 art.put("email", mEmail);
                 art.put("password", mPassword);
 
+                JSONObject reggie = new JSONObject();
+                reggie.put("request", "login");
+                reggie.put("email", mEmail);
+                reggie.put("password", mPassword);
+
                 String info = art.toString();
                 System.out.println("~~~~~~~~~~~~~~~~~ASDFASDF~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + info);
 
                 //Write userInfo to server and close the OutputStream
                 writer.println(art);
                 //os.writeObject(userInfo);
+                writer.flush();
+
+                writer.println(reggie);
+
                 writer.flush();
 //                writer.close();
 
@@ -363,8 +367,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String res;
                 while ((res = read.readLine()) != null) {
                     response.append(res);
+                    res = read.readLine();
+                    response.append(", ");
+                    response.append(res);
                     break;
                 }
+
+                System.out.println("Response is " + response);
 
                 /*
                 InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
@@ -390,16 +399,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
+//            showProgress(false);
 
             System.out.println("Reponse is " + response);
-            finish();
+
+            if (response.equals("success")) {
+                finish();
+            } else {
+//                The user name already exists
+//                register.invalidRegister();
+
+            }
         }
 
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+ //           showProgress(false);
         }
     }
 }
