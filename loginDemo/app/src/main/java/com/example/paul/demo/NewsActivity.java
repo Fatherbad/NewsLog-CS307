@@ -283,6 +283,9 @@ public class NewsActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
 
             try {
+                if (sock.isClosed()) {
+                    System.out.println("Socket is not open, this is printed from NewsActivity");
+                }
                 // Simulate network access.
 //                sock = SocketHandler.getSocket();
                 PrintWriter writer = new PrintWriter(sock.getOutputStream());
