@@ -39,6 +39,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -47,7 +49,9 @@ import java.util.ArrayList;
 public class LibraryActivity extends AppCompatActivity {
 
     public ListView mDrawerList;
+    public ListView favList;
     public ArrayAdapter<String> mAdapter;
+    private ArrayAdapter<String> favAdapter;
     protected Socket sock;
     private ArrayList<String> favs;
 
@@ -60,6 +64,20 @@ public class LibraryActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
 
+        favList = (ListView)findViewById(R.id.favArticles);
+
+        GetFavs getFavs = new GetFavs();
+        getFavs.execute();
+        try {
+            getFavs.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        favAdapter = new ArrayAdapter<String>(this, R.layout.list_item, favs);
+        favList.setAdapter(favAdapter);
 
     }
 
@@ -103,7 +121,7 @@ public class LibraryActivity extends AppCompatActivity {
 
         private final String mRequest;
 
-        GetFavs(String email, String category) {
+        GetFavs() {
             mRequest = "library";
         }
 
