@@ -175,7 +175,7 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Select Category", "Manage Account", "Sign Out"};
+        String[] osArray = { "Select Category", "Manage Account","Mylibrary","Sign Out"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -197,10 +197,17 @@ public class NewsActivity extends AppCompatActivity {
                         break;
 
                     case 2:
+                        intent = new Intent(NewsActivity.this,LibraryActivity.this);
+                        startActivity(intent);
+                        break;
+
+                    case 3:
                         com.example.paul.demo.SocketHandler.closeSocket();
                         intent = new Intent(NewsActivity.this, LoginActivity.class);
                         startActivity(intent);
                         break;
+
+
                 }
 //                This pops up a small dialog at the bottom of the screen
 //                Toast.makeText(CategoryActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
