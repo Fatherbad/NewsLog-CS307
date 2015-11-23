@@ -36,6 +36,15 @@
         android:visibility="gone">
     </WebView>
 
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/save_article_button"
+        android:layout_gravity="right|top"
+        android:src="@drawable/favorite"/>
+
 
     <!--<TextView
         android:layout_width="match_parent"

@@ -24,6 +24,7 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -58,6 +59,7 @@ public class NewsActivity extends AppCompatActivity {
     private WebView webView1;
     private WebView webView2;
     private WebView webView3;
+    private ImageButton favorite;
     private WebView[] webViews = new WebView[3];
     private String category;
     private String email;
@@ -92,6 +94,18 @@ public class NewsActivity extends AppCompatActivity {
         webView1.canGoBack();
         setOnTouch(webView1);
         webViews[1] = webView1;
+
+        favorite = (ImageButton)findViewById(R.id.save_article_button);
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    SaveArticle saveArticle = new SaveArticle(currPage, category.toLowerCase());
+                    saveArticle.execute();
+                    saveArticle.get();
+                } catch (Exception ex) {ex.printStackTrace();}
+            }
+        });
 
         webView2 = (WebView) findViewById(R.id.webView2);
 
@@ -343,6 +357,51 @@ public class NewsActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    public class SaveArticle extends AsyncTask<Void, Void, Boolean> {
+
+        private final String mUrl;
+        private final String mCategory;
+        private final String mRequest;
+
+        SaveArticle(String Url, String category) {
+            mUrl = Url;
+            mCategory = category;
+            mRequest = "save";
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+            try {
+                if (sock.isClosed()) {
+                    System.out.println("Socket is not open, this is printed from NewsActivity");
+                }
+                // Simulate network access.
+//                sock = SocketHandler.getSocket();
+                PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                //Create JSON object containing the needed user info
+                JSONObject newsInfo = new JSONObject();
+                newsInfo.put("request", mRequest);
+                newsInfo.put("url", mUrl);
+                newsInfo.put("category", mCategory);
+
+                String info = newsInfo.toString();
+                writer.println(info);
+                writer.flush();
+
+            } catch (UnknownHostException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+    }
+
+
     private void animateL(final WebView view) {
         Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
                 android.R.anim.slide_in_left);
