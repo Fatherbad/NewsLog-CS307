@@ -1,5 +1,6 @@
 package com.example.paul.demo;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -28,6 +29,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
 
 /**
  * Created by xaldin560 on 11/22/2015.
@@ -36,16 +48,23 @@ public class LibraryActivity extends AppCompatActivity {
 
     public ListView mDrawerList;
     public ArrayAdapter<String> mAdapter;
+    protected Socket sock;
+    private ArrayList<String> favs;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sock = com.example.paul.demo.SocketHandler.getSocket();
+
         mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
+
+
     }
 
     private void addDrawerItems() {
-        String[] osArray = {"Select Category","Manage Account","Sign Out"};
+        String[] osArray = {"Select Category", "Manage Account","Sign Out"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -74,12 +93,70 @@ public class LibraryActivity extends AppCompatActivity {
 
 
                 }
-//                This pops up a small dialog at the bottom of the screen
-//                Toast.makeText(CategoryActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
-
     }
+
+    public class GetFavs extends AsyncTask<Void, Void, Boolean> {
+
+        private final String mRequest;
+
+        GetFavs(String email, String category) {
+            mRequest = "library";
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+            try {
+                if (sock.isClosed()) {
+                    System.out.println("Socket is not open, this is printed from LibraryActivity");
+                }
+                // Simulate network access.
+//                sock = SocketHandler.getSocket();
+                PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                //Create JSON object containing the needed user info
+                JSONObject newsInfo = new JSONObject();
+                newsInfo.put("request", mRequest);
+
+
+                String info = newsInfo.toString();
+                writer.println(info);
+                writer.flush();
+
+                InputStreamReader reader = new InputStreamReader(sock.getInputStream());
+                BufferedReader bfRead = new BufferedReader(reader);
+                String msg;
+                //Edit limit on for loop to increase or decrease amount of files fed from server
+                //while(true) {
+                //for (int i = 0; i < 20; i++) {
+                while(true) {
+
+                    msg = bfRead.readLine();
+
+                    if (msg.equals("end")) {
+                        break;
+                    } else if (msg == null || !msg.contains("http")) {
+
+                    } else {
+                        System.out.println("ADDING: " + msg);
+                        favs.add(msg);
+                    }
+                    //break;
+                }
+
+            } catch (UnknownHostException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+    }
+
 }
 
