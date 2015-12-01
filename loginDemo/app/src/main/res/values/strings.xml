@@ -3,6 +3,7 @@
     
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
+    <string name="Change_Theme">Change Your Theme</string>
     <string name="prompt_password">Password</string>
     <string name="change_password">Enter New Password</string>
     <string name="Retype_pass">Re-Type New Password</string>

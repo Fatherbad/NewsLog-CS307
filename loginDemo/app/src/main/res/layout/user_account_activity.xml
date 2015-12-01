@@ -19,7 +19,7 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <EditText
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:id="@+id/new_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,6 +55,14 @@
         android:id="@+id/change_pass"
         android:textColor="@color/White"/>
 
+    <Button
+        android:background="@color/LightSeaGreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Change_Theme"
+        android:id="@+id/change_theme"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/White"/>
 
     <Button
         android:background="@color/LightSeaGreen"
