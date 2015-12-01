@@ -197,7 +197,7 @@ public class NewsActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        intent = new Intent(NewsActivity.this,LibraryActivity.this);
+                        intent = new Intent(NewsActivity.this,LibraryActivity.class);
                         startActivity(intent);
                         break;
 
