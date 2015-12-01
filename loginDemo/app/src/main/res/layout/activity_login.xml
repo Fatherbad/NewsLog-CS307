@@ -64,7 +64,7 @@
                 android:background="@color/LightSeaGreen"
                 android:textColor="@color/White"
                 android:textStyle="bold"/>
-            <Button
+            <Button android:id="@+id/go_to_register" style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
