@@ -50,7 +50,7 @@
 
 
         <Button
-            android:background="@color/LightSeaGreen"
+            android:background="@drawable/mybutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/back_to_login"
