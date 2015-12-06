@@ -76,6 +76,12 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
     }
+    private void changeTheme(){
+        //Do something
+        // get with id and change start/end colors
+        // android:id="@+id/themeColor
+
+    }
 
     private void addDrawerItems() {
         String[] osArray = { "Select Category", "Sign Out"};
