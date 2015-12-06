@@ -58,6 +58,13 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
                 resetInterests();
             }
         });
+        Button changeTheme = (Button) findViewById(R.id.change_theme);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // changeTheme();
+            }
+        });
         Button deleteAccount = (Button) findViewById(R.id.delete_act);
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +75,12 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
+    }
+    private void changeTheme(){
+        //Do something
+        // get with id and change start/end colors
+        // android:id="@+id/themeColor
+
     }
 
     private void addDrawerItems() {

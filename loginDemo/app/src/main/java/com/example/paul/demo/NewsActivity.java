@@ -234,7 +234,7 @@ public class NewsActivity extends AppCompatActivity {
     }
 
 
-    public void onSwipeRight() {
+    public void onSwipeLeft() {
 
         animateL(webViews[1]);
         removeOnTouch(webViews[1]);
@@ -245,7 +245,13 @@ public class NewsActivity extends AppCompatActivity {
         webViews[1].setVisibility(View.GONE);
         webViews[2].setVisibility(View.VISIBLE);
         setOnTouch(webViews[2]);
-
+        try {
+            Swipes swipes = new Swipes(currPage, "right");
+            swipes.execute();
+            swipes.get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
         if(!news.isEmpty()) {
             currPage = news.get(0);
             news.remove(0);
@@ -259,13 +265,17 @@ public class NewsActivity extends AppCompatActivity {
             }
         }
 
+        try {
+
+        } catch (Exception ex) {ex.printStackTrace();}
+
         webViews[1].loadUrl(currPage);
         WebView temp = webViews[1];
         webViews[1] = webViews[2];
         webViews[2] = temp;
     }
 
-    public void onSwipeLeft() {
+    public void onSwipeRight() {
         //try {
         /*} catch (InterruptedException e) {
             e.printStackTrace();
@@ -276,7 +286,13 @@ public class NewsActivity extends AppCompatActivity {
         webViews[0].setVisibility(View.VISIBLE);
         //animateL(webViews[0]);
         setOnTouch(webViews[0]);
-
+        try {
+            Swipes swipes = new Swipes(currPage, "right");
+            swipes.execute();
+            swipes.get();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
         if(!news.isEmpty()) {
             currPage = news.get(0);
             news.remove(0);
@@ -296,7 +312,43 @@ public class NewsActivity extends AppCompatActivity {
         webViews[0] = temp;
 
     }
+    public class Swipes extends AsyncTask<Void, Void, Boolean> {
+        private final String url;
+        private final String dir;
 
+        Swipes(String url, String dir) {
+            this.url = url;
+            this.dir = dir;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                if (sock.isClosed()) {
+                    System.out.println("Socket is not open, this is printed from NewsActivity");
+                }
+                // Simulate network access.
+//                sock = SocketHandler.getSocket();
+                PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                //Create JSON object containing the needed user info
+                JSONObject newsInfo = new JSONObject();
+
+                newsInfo.put("request", "swipe");
+                newsInfo.put("url", url);
+                newsInfo.put("swipe", dir);
+
+                String info = newsInfo.toString();
+                writer.println(info);
+                writer.flush();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
     public class GetNews extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
