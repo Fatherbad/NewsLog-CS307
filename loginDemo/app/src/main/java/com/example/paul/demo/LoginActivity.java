@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -60,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
 
     public static final String EMAIL = "EMAIL";
+    public static final String LAST = "LastUser";
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -74,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public AlertDialog.Builder alertBuild;
     public AlertDialog alertMessage;
     private boolean success;
+    public SharedPreferences sharedPref;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -94,7 +98,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        String lastUser = sharedPref.getString(LAST, "");
+        String lastUserPassword = sharedPref.getString(lastUser, "");
+
+
         mPasswordView = (EditText) findViewById(R.id.password);
+
+        if (lastUser != "" && lastUserPassword != "") {
+            mEmailView.setText(lastUser);
+            mPasswordView.setText(lastUserPassword);
+        }
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -139,6 +154,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+
+
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -151,6 +168,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(LAST, email);
+        editor.putString(email, password);
+        editor.commit();
 
         boolean cancel = false;
         View focusView = null;
