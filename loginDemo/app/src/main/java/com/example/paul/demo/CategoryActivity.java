@@ -129,7 +129,7 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Manage Account", "Sign Out"};
+        String[] osArray = { "Manage Account", "My Library", "Sign Out"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -144,6 +144,10 @@ public class CategoryActivity extends AppCompatActivity {
                         break;
 
                     case 1:
+                        Intent in = new Intent(CategoryActivity.this, LibraryActivity.class);
+                        startActivity(in);
+                        break;
+                    case 2:
                         com.example.paul.demo.SocketHandler.closeSocket();
                         Intent i = new Intent(CategoryActivity.this, LoginActivity.class);
                         startActivity(i);

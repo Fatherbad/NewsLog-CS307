@@ -53,12 +53,13 @@ public class LibraryActivity extends AppCompatActivity {
     public ArrayAdapter<String> mAdapter;
     private ArrayAdapter<String> favAdapter;
     protected Socket sock;
-    private ArrayList<String> favs;
+    public ArrayList<String> favs = new ArrayList<String>();
+    public static final String FAVORITE = "FAVORITE";
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_library);
         sock = com.example.paul.demo.SocketHandler.getSocket();
 
         mDrawerList = (ListView) findViewById(R.id.navList);
@@ -66,9 +67,10 @@ public class LibraryActivity extends AppCompatActivity {
 
         favList = (ListView)findViewById(R.id.favArticles);
 
-        GetFavs getFavs = new GetFavs();
-        getFavs.execute();
+
         try {
+            GetFavs getFavs = new GetFavs();
+            getFavs.execute();
             getFavs.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -76,9 +78,27 @@ public class LibraryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //TODO: Get the names of the articles to display to the user
+
+        addFavItems();
+
+    }
+
+    private void addFavItems() {
         favAdapter = new ArrayAdapter<String>(this, R.layout.list_item, favs);
         favList.setAdapter(favAdapter);
 
+        favList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+
+                //Get the item selected from the "fav" list
+                Intent intent = new Intent(LibraryActivity.this, DisplayFavoriteArticle.class);
+                String favItemSelectedURL = favs.get((int)id);
+                intent.putExtra(FAVORITE, favItemSelectedURL);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addDrawerItems() {
@@ -94,7 +114,7 @@ public class LibraryActivity extends AppCompatActivity {
                 switch ((int)id) {
 
                     case 0:
-                        intent = new Intent(LibraryActivity.this,NewsActivity.class);
+                        intent = new Intent(LibraryActivity.this,CategoryActivity.class);
                         startActivity(intent);
                         break;
 
@@ -146,13 +166,12 @@ public class LibraryActivity extends AppCompatActivity {
 
                 InputStreamReader reader = new InputStreamReader(sock.getInputStream());
                 BufferedReader bfRead = new BufferedReader(reader);
-                String msg;
                 //Edit limit on for loop to increase or decrease amount of files fed from server
                 //while(true) {
                 //for (int i = 0; i < 20; i++) {
                 while(true) {
 
-                    msg = bfRead.readLine();
+                    String msg = bfRead.readLine();
 
                     if (msg.equals("end")) {
                         break;
