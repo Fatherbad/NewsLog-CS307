@@ -19,6 +19,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">Contacts permissions are needed for providing email
         completions.</string>
+    <string name="back">Back To Account</string>
     <string name="register_user">Submit</string>
     <string name="back_to_login">Back To Login</string>
     <string name="category_activity">Cetegory Selection</string>

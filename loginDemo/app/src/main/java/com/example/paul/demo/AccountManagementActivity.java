@@ -227,7 +227,9 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
     }
 
     private void deleteAccount(){
-        //TODO:DELETE USER FROM BACKEND
+
+            startActivity(new Intent (AccountManagementActivity.this, ConfirmDelete.class));
+
     }
 
 }

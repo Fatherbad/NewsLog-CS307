@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <EditText android:id="@+id/passwordDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Old_Pass"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <Button
+            android:layout_marginTop="30dp"
+            android:background="@drawable/mybutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Delete_Acct"
+            android:id="@+id/delete_act_confirm"
+            android:textColor="@color/White"/>
+        <Button
+            android:layout_marginTop="30dp"
+            android:background="@drawable/mybutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:id="@+id/return_back"
+            android:textColor="@color/White"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

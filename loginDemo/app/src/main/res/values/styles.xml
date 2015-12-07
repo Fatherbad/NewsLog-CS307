@@ -8,5 +8,9 @@
         <item name="colorAccent">@color/darkish</item>
     </style>
 
+    <style name="AppTheme.DeleteAcct">
 
+        <item name="android:windowIsTranslucent">true</item>
+
+    </style>
 </resources>

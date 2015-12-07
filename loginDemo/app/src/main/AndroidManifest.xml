@@ -53,7 +53,16 @@
 
         <activity
             android:name=".AccountManagementActivity"
+            android:theme="@style/AppTheme"
+
             android:label="@string/app_name"
+            android:noHistory="true">
+        </activity>
+
+        <activity
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.DeleteAcct"
+            android:name=".ConfirmDelete"
             android:noHistory="true">
         </activity>
 
