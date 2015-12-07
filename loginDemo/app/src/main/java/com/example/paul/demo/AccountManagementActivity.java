@@ -3,12 +3,16 @@ package com.example.paul.demo;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +22,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.regex.Pattern;
 
 /**
@@ -32,6 +40,8 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
     private EditText mPasswordView;
     public ListView mDrawerList;
     public ArrayAdapter<String> mAdapter;
+
+    private Socket sock = com.example.paul.demo.SocketHandler.getSocket();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +62,21 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
             }
         });
         Button resetInterests = (Button) findViewById(R.id.reset_interests);
-        changePassword.setOnClickListener(new View.OnClickListener() {
+        resetInterests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resetInterests();
             }
         });
         Button changeTheme = (Button) findViewById(R.id.change_theme);
-        changePassword.setOnClickListener(new View.OnClickListener() {
+        changeTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // changeTheme();
+                changeTheme();
             }
         });
         Button deleteAccount = (Button) findViewById(R.id.delete_act);
-        changePassword.setOnClickListener(new View.OnClickListener() {
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deleteAccount();
@@ -77,10 +87,26 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
         addDrawerItems();
     }
     private void changeTheme(){
+        /*
         //Do something
-        // get with id and change start/end colors
-        // android:id="@+id/themeColor
+        Button changeTheme = (Button) findViewById(R.id.change_theme);
+        View buttonTheme= (View) findViewById(R.id.potatoe);
+        if(buttonTheme == null) {
+            //set
+            System.out.println("-!-!-! AY\n\n");
+        }else {
+            System.out.println("cheeeese");
+            int colors[] = { 0xff255779, 0xffa6c0cd }
+            GradientDrawable gradientDrawable = new GradientDrawable(
+                    GradientDrawable.Orientation.TOP_BOTTOM, colors);
 
+            view.setBackgroundDrawable(gradientDrawable);
+        }
+        //buttonTheme.setEnabled(true);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~CHANGE THEME TEST~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // android:id="@+id/themeColor
+*/
     }
 
     private void addDrawerItems() {
@@ -131,7 +157,6 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
 
     }
     private void attemptPassChange() {
-
         // Password reset errors.
         mNewPasswordView.setError(null);
         mNewPasswordView2.setError(null);
@@ -156,19 +181,21 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
             focusView = mPasswordView;
             cancel = true;
         }
-        if (!TextUtils.isEmpty(password) && !isCurrentPassword(password)) {
+
+       /* if (!TextUtils.isEmpty(password) && !isCurrentPassword(password)) {
             //NEED TO IMPLEMENT A GET REQUEST TO DATABASE
             mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
             cancel = true;
-        }
+
+        }*/
 
         if (cancel) {
             //Print error messages
             focusView.requestFocus();
         } else {
             //Change user password
-            changePassword();
+            changePassword(newPass, password);
         }
     }
 
@@ -181,8 +208,18 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
         return true;
     }
 
-    private void changePassword(){
-        //TODO:CHANGE PW IN BACKEND
+    private void changePassword(String newpass, String password){
+        JSONObject passInfo = new JSONObject();
+
+        try{
+            PrintWriter writer = new PrintWriter(sock.getOutputStream());
+            passInfo.put("request", "change password");
+            passInfo.put("old password", password);
+            passInfo.put("new password", newpass);
+            String passChng = passInfo.toString();
+            writer.println(passChng);
+            writer.flush();
+        } catch (Exception ex) {ex.printStackTrace();}
     }
 
     private void resetInterests(){

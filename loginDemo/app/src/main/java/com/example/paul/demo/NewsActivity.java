@@ -112,7 +112,6 @@ public class NewsActivity extends AppCompatActivity {
         WebSettings webSettings1 = webView2.getSettings();
         webSettings1.setJavaScriptEnabled(true);
 
-
         webView2.setWebViewClient(new Callback());
         webView2.loadUrl(news.get(0));
         news.remove(0);
