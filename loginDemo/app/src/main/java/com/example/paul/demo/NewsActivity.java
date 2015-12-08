@@ -245,7 +245,7 @@ public class NewsActivity extends AppCompatActivity {
         webViews[2].setVisibility(View.VISIBLE);
         setOnTouch(webViews[2]);
         try {
-            Swipes swipes = new Swipes(currPage, "right");
+            Swipes swipes = new Swipes(currPage, "left");
             swipes.execute();
             swipes.get();
         } catch (Exception ex){
