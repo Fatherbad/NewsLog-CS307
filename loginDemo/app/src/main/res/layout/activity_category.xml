@@ -34,12 +34,12 @@
             android:id="@+id/SportsButton"
             android:layout_marginLeft="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@drawable/Sports_Category"
+            android:background="@drawable/sports307"
             android:alpha="0.95"
             android:text="Sports"
             android:textSize="25dp"
             android:tag="@string/sports"
-            android:textColor="@color/Black"
+            android:textColor="@color/White"
             android:textStyle="bold"/>
 
         <Button
@@ -51,7 +51,7 @@
             android:alpha="0.85"
             android:background="@drawable/politics307"
             android:text="Politics"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:tag="@string/politics"
             android:textColor="@color/Black"
             android:textStyle="bold"/>
@@ -110,12 +110,12 @@
             android:id="@+id/EconomyButton"
             android:layout_marginLeft="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@drawable/economy307"
+            android:background="@drawable/economy3072"
             android:alpha="0.95"
             android:text="Economy"
             android:textSize="22dp"
             android:tag="@string/economy"
-            android:textColor="@color/Black"
+            android:textColor="@color/White"
             android:textStyle="bold"/>
 
         <Button
@@ -124,12 +124,12 @@
             android:id="@+id/EntertainmentButton"
             android:layout_marginRight="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@drawable/entertainment307"
+            android:background="@drawable/entertainment3072"
             android:alpha="0.98"
             android:text="Entertainment"
             android:textSize="22dp"
             android:tag="@string/entertainment"
-            android:textColor="@color/Black"
+            android:textColor="@color/White"
             android:textStyle="bold"/>
 
 
