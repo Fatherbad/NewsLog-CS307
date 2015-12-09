@@ -34,11 +34,13 @@
             android:id="@+id/SportsButton"
             android:layout_marginLeft="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@color/material_blue_grey_900"
+            android:background="@drawable/Sports_Category"
+            android:alpha="0.95"
             android:text="Sports"
-            android:textSize="15dp"
+            android:textSize="25dp"
             android:tag="@string/sports"
-            android:textColor="@color/White"/>
+            android:textColor="@color/Black"
+            android:textStyle="bold"/>
 
         <Button
             android:layout_width="0dp"
@@ -46,11 +48,13 @@
             android:id="@+id/PoliticsButton"
             android:layout_marginRight="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@color/Red"
+            android:alpha="0.85"
+            android:background="@drawable/politics307"
             android:text="Politics"
-            android:textSize="15dp"
+            android:textSize="30dp"
             android:tag="@string/politics"
-            android:textColor="@color/White"/>
+            android:textColor="@color/Black"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>
@@ -68,11 +72,13 @@
             android:id="@+id/TechButton"
             android:layout_marginLeft="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@color/DarkOrange"
+            android:background="@drawable/tech307"
+            android:alpha="0.9"
             android:text="Technology"
-            android:textSize="15dp"
+            android:textSize="22dp"
             android:tag="@string/tech"
-            android:textColor="@color/White"/>
+            android:textColor="@color/White"
+            android:textStyle="bold"/>
 
         <Button
             android:layout_width="0dp"
@@ -80,11 +86,12 @@
             android:id="@+id/ScienceButton"
             android:layout_marginRight="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@color/ForestGreen"
+            android:background="@drawable/science307"
             android:text="Science"
-            android:textSize="15dp"
+            android:textSize="22dp"
             android:tag="@string/science"
-            android:textColor="@color/White"/>
+            android:textColor="@color/White"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>
@@ -103,11 +110,13 @@
             android:id="@+id/EconomyButton"
             android:layout_marginLeft="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@color/DodgerBlue"
+            android:background="@drawable/economy307"
+            android:alpha="0.95"
             android:text="Economy"
-            android:textSize="15dp"
+            android:textSize="22dp"
             android:tag="@string/economy"
-            android:textColor="@color/White"/>
+            android:textColor="@color/Black"
+            android:textStyle="bold"/>
 
         <Button
             android:layout_width="0dp"
@@ -115,11 +124,13 @@
             android:id="@+id/EntertainmentButton"
             android:layout_marginRight="@dimen/category_button_margin_horizontal"
             android:layout_weight="0.5"
-            android:background="@color/DarkOrchid"
+            android:background="@drawable/entertainment307"
+            android:alpha="0.98"
             android:text="Entertainment"
-            android:textSize="15dp"
+            android:textSize="22dp"
             android:tag="@string/entertainment"
-            android:textColor="@color/White"/>
+            android:textColor="@color/Black"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>

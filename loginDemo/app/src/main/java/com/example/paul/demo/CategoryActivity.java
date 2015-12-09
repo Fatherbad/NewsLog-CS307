@@ -2,6 +2,7 @@ package com.example.paul.demo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,19 +56,22 @@ public class CategoryActivity extends AppCompatActivity {
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
 
-        sportsButton = (Button)findViewById(R.id.SportsButton);
+
         sportsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) sportsButton.getTag());
+
                 intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
         });
 
         politicsButton = (Button)findViewById(R.id.PoliticsButton);
+        Drawable loginActivityBackground2 = findViewById(R.id.SportsButton).getBackground();
+        loginActivityBackground2.setAlpha(250);
         politicsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -127,6 +132,7 @@ public class CategoryActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void addDrawerItems() {
         String[] osArray = { "Manage Account", "My Library", "Sign Out"};
