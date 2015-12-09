@@ -56,14 +56,13 @@ public class CategoryActivity extends AppCompatActivity {
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
 
-
+        sportsButton = (Button)findViewById(R.id.SportsButton);
         sportsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) sportsButton.getTag());
-
                 intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }
