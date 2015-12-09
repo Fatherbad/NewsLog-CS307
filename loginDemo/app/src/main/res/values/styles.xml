@@ -6,20 +6,47 @@
         <item name="colorPrimary">@color/darkish</item>
         <item name="colorPrimaryDark">@color/darkish</item>
         <item name="colorAccent">@color/darkish</item>
-        <item name="android:buttonStyle">@style/buttonThemeInit</item>
-        <item name="buttonStyle">@style/buttonThemeInit</item>
+        <item name="android:buttonStyle">@style/buttonThemeDark</item>
+        <item name="buttonStyle">@style/buttonThemeDark</item>
     </style>
 
-    <style name="AppTheme.DeleteAcct">
+    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/darkish</item>
+        <item name="colorPrimaryDark">@color/darkish</item>
+        <item name="colorAccent">@color/darkish</item>
+        <item name="android:buttonStyle">@style/buttonThemeBlue</item>
+        <item name="buttonStyle">@style/buttonThemeBlue</item>
+    </style>
 
+    <style name="DeleteAcct" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/Red</item>
+        <item name="colorPrimaryDark">@color/DarkRed</item>
+        <item name="colorAccent">@color/Red</item>
         <item name="android:windowIsTranslucent">true</item>
-
+        <item name="android:buttonStyle">@style/buttonThemeRed</item>
+        <item name="buttonStyle">@style/buttonThemeRed</item>
     </style>
 
-    <style name="buttonThemeInit" parent="android:Widget.Button">
+    <style name="buttonThemeDark" parent="android:Widget.Button">
         <item name="android:background">@drawable/mybutton</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:height">36dp</item>
     </style>
+
+    <style name="buttonThemeRed" parent="android:Widget.Button">
+        <item name="android:background">@drawable/redbutton</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:height">36dp</item>
+    </style>
+
+    <style name="buttonThemeBlue" parent="android:Widget.Button">
+        <item name="android:background">@drawable/buttonblue</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:height">36dp</item>
+    </style>
+
 </resources>

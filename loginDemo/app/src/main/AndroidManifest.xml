@@ -13,11 +13,13 @@
         android:icon="@mipmap/squid2"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+         >
 
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppThemeBlue"
+
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,21 +55,20 @@
         <activity
             android:name=".LoginDialogActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
+            android:theme="@style/AppThemeBlue"
             android:noHistory="true">
         </activity>
 
         <activity
             android:name=".AccountManagementActivity"
-            android:theme="@style/AppTheme"
-
+            android:theme="@style/AppThemeBlue"
             android:label="@string/app_name"
             android:noHistory="true">
         </activity>
 
         <activity
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.DeleteAcct"
+            android:theme="@style/DeleteAcct"
             android:name=".ConfirmDelete"
             android:noHistory="true">
         </activity>

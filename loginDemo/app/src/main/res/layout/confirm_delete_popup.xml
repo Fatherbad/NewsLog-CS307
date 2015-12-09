@@ -23,7 +23,6 @@
 
         <Button
             android:layout_marginTop="30dp"
-            android:background="@drawable/mybutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Delete_Acct"
@@ -31,7 +30,6 @@
             android:textColor="@color/White"/>
         <Button
             android:layout_marginTop="30dp"
-            android:background="@drawable/mybutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/back"
