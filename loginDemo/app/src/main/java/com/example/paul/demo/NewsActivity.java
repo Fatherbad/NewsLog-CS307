@@ -56,6 +56,7 @@ public class NewsActivity extends Activity {
     private Socket sock = com.example.paul.demo.SocketHandler.getSocket();
     public ListView mDrawerList;
     public ArrayAdapter<String> mAdapter;
+    int mid = 1, left = 0, right = 2;
 //    private GetNews getNews;
 
     @Override
@@ -232,15 +233,15 @@ public class NewsActivity extends Activity {
 
     public void onSwipeLeft() {
 
-        animateL(webViews[1]);
-        removeOnTouch(webViews[1]);
+        animateL(webViews[mid]);
+        removeOnTouch(webViews[mid]);
         //try {
         /*} catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        webViews[1].setVisibility(View.GONE);
-        webViews[2].setVisibility(View.VISIBLE);
-        setOnTouch(webViews[2]);
+        webViews[mid].setVisibility(View.GONE);
+        webViews[right].setVisibility(View.VISIBLE);
+        setOnTouch(webViews[right]);
         try {
             Swipes swipes = new Swipes(currPage, "left");
             swipes.execute();
@@ -264,11 +265,11 @@ public class NewsActivity extends Activity {
         try {
 
         } catch (Exception ex) {ex.printStackTrace();}
-
-        webViews[1].loadUrl(currPage);
-        WebView temp = webViews[1];
-        webViews[1] = webViews[2];
-        webViews[2] = temp;
+        int temp = mid;
+        mid = right;
+        right = mid;
+        //webViews[1].loadUrl(currPage);
+        webViews[right].loadUrl(currPage);
     }
 
     public void onSwipeRight() {
@@ -276,12 +277,12 @@ public class NewsActivity extends Activity {
         /*} catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        animateR(webViews[1]);
-        removeOnTouch(webViews[1]);
-        webViews[1].setVisibility(View.GONE);
-        webViews[0].setVisibility(View.VISIBLE);
+        animateR(webViews[mid]);
+        removeOnTouch(webViews[mid]);
+        webViews[mid].setVisibility(View.GONE);
+        webViews[left].setVisibility(View.VISIBLE);
         //animateL(webViews[0]);
-        setOnTouch(webViews[0]);
+        setOnTouch(webViews[left]);
         try {
             Swipes swipes = new Swipes(currPage, "right");
             swipes.execute();
@@ -289,6 +290,7 @@ public class NewsActivity extends Activity {
         } catch (Exception ex){
             ex.printStackTrace();
         }
+        System.out.println(currPage + "---------" + left);
         if(!news.isEmpty()) {
             currPage = news.get(0);
             news.remove(0);
@@ -302,10 +304,13 @@ public class NewsActivity extends Activity {
             }
         }
 
-        webViews[1].loadUrl(currPage);
-        WebView temp = webViews[1];
-        webViews[1] = webViews[0];
-        webViews[0] = temp;
+        //System.out.println(currPage+ "---------" + left);
+
+        int temp = mid;
+        mid = left;
+        left = mid;
+        //webViews[1].loadUrl(currPage);
+        webViews[left].loadUrl(currPage);
 
     }
     public class Swipes extends AsyncTask<Void, Void, Boolean> {
@@ -460,7 +465,11 @@ public class NewsActivity extends Activity {
     private void animateL(final WebView view) {
         Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
                 R.anim.slide_out_left);
+        //while(!anim.isInitialized())
+
+        System.out.println("HERERERERERERERERERERE~~~~~RTRTRTRTRT");
         view.startAnimation(anim);
+
 
         /*try {
             wait(100);
@@ -471,7 +480,9 @@ public class NewsActivity extends Activity {
     private void animateR(final WebView view) {
         Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
                 android.R.anim.slide_out_right);
-        view.startAnimation(anim);
+        //while(!anim.hasStarted())
+            view.startAnimation(anim);
+        //while(!anim.hasEnded());
         /*try {
             wait(100);
         }catch(InterruptedException wt){
