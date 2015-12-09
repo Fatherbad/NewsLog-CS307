@@ -16,6 +16,12 @@ public class DisplayFavoriteArticle extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int temp = com.example.paul.demo.themeHandler.getTheme();
+        if(temp == 0) {
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeBlue);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_fav);
 
