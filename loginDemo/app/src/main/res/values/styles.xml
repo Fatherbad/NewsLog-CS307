@@ -6,11 +6,20 @@
         <item name="colorPrimary">@color/darkish</item>
         <item name="colorPrimaryDark">@color/darkish</item>
         <item name="colorAccent">@color/darkish</item>
+        <item name="android:buttonStyle">@style/buttonThemeInit</item>
+        <item name="buttonStyle">@style/buttonThemeInit</item>
     </style>
 
     <style name="AppTheme.DeleteAcct">
 
         <item name="android:windowIsTranslucent">true</item>
 
+    </style>
+
+    <style name="buttonThemeInit" parent="android:Widget.Button">
+        <item name="android:background">@drawable/mybutton</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:height">36dp</item>
     </style>
 </resources>

@@ -61,7 +61,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Sign in"
-                android:background="@drawable/mybutton"
                 android:textColor="@color/White"
                 android:textStyle="bold"/>
             <Button android:id="@+id/go_to_register" style="?android:textAppearanceSmall"
@@ -69,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Registration"
-                android:background="@drawable/mybutton"
                 android:textColor="@color/White"
                 android:textStyle="bold"/>
 

@@ -76,7 +76,7 @@
     <color name="DarkGoldenrod">#B8860B</color>
     <color name="FireBrick">#B22222</color>
     <color name="PowderBlue">#B0E0E6</color>
-    <color name="darkish">#58857e</color>
+    <color name="darkish">#2E2E2E</color>
     <color name="LightSteelBlue">#B0C4DE</color>
     <color name="PaleTurquoise">#AFEEEE</color>
     <color name="GreenYellow">#ADFF2F</color>
@@ -118,6 +118,7 @@
     <color name="MediumTurquoise">#48D1CC</color>
     <color name="DarkSlateBlue">#483D8B</color>
     <color name="SteelBlue">#4682B4</color>
+    <color name="ProfessionalBlue">#1C52DB</color>
     <color name="RoyalBlue">#4169E1</color>
     <color name="Turquoise">#40E0D0</color>
     <color name="MediumSeaGreen">#3CB371</color>
