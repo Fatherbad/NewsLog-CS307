@@ -6,16 +6,15 @@ package com.example.paul.demo;
 public class themeHandler {
     private static int theme = 0;
 
-    public void changeTheme(){
+    public static void changeTheme(){
         if(theme == 0) {
             theme = 1;
         }else{
             theme = 0;
         }
-
     }
 
-    public int getTheme(){
+    public static int getTheme(){
         return theme;
     }
 }

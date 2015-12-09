@@ -1,5 +1,6 @@
 package com.example.paul.demo;
 
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
@@ -31,7 +32,7 @@ import java.util.regex.Pattern;
 /**
  * Created by stephen on 10/12/15.
  */
-public class AccountManagementActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class AccountManagementActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     // UI references.
@@ -45,6 +46,12 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int temp = com.example.paul.demo.themeHandler.getTheme();
+        if(temp == 0) {
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeBlue);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_account_activity);
 
@@ -87,26 +94,8 @@ public class AccountManagementActivity extends AppCompatActivity implements Load
         addDrawerItems();
     }
     private void changeTheme(){
-        /*
-        //Do something
-        Button changeTheme = (Button) findViewById(R.id.change_theme);
-        View buttonTheme= (View) findViewById(R.id.potatoe);
-        if(buttonTheme == null) {
-            //set
-            System.out.println("-!-!-! AY\n\n");
-        }else {
-            System.out.println("cheeeese");
-            int colors[] = { 0xff255779, 0xffa6c0cd }
-            GradientDrawable gradientDrawable = new GradientDrawable(
-                    GradientDrawable.Orientation.TOP_BOTTOM, colors);
-
-            view.setBackgroundDrawable(gradientDrawable);
-        }
-        //buttonTheme.setEnabled(true);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~CHANGE THEME TEST~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-        // android:id="@+id/themeColor
-*/
+        com.example.paul.demo.themeHandler.changeTheme();
+        startActivity(new Intent(AccountManagementActivity.this, AccountManagementActivity.class));
     }
 
     private void addDrawerItems() {

@@ -46,7 +46,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by xaldin560 on 11/22/2015.
  */
-public class LibraryActivity extends AppCompatActivity {
+public class LibraryActivity extends Activity {
 
     public ListView mDrawerList;
     public ListView favList;
@@ -58,8 +58,16 @@ public class LibraryActivity extends AppCompatActivity {
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        int temp = com.example.paul.demo.themeHandler.getTheme();
+        if(temp == 0) {
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeBlue);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+
         sock = com.example.paul.demo.SocketHandler.getSocket();
 
         mDrawerList = (ListView) findViewById(R.id.navList);

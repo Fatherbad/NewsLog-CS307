@@ -32,7 +32,7 @@ import java.net.Socket;
 /**
  * Created by nathan on 10/10/15.
  */
-public class CategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends Activity {
 
     public static final String CATEGORY = "CATEGORY";
     public static final String EMAIL ="EMAIL";
@@ -50,20 +50,26 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int temp = com.example.paul.demo.themeHandler.getTheme();
+        if(temp == 0) {
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeBlue);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
 
-
+        sportsButton = (Button)findViewById(R.id.SportsButton);
         sportsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 //Add category tag to intent and pass to NewsActivity
                 Intent intent = new Intent(CategoryActivity.this, NewsActivity.class);
                 intent.putExtra(CATEGORY, (String) sportsButton.getTag());
-
                 intent.putExtra(EMAIL, email);
                 startActivity(intent);
             }

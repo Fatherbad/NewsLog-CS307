@@ -3,6 +3,7 @@ package com.example.paul.demo;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Looper;
@@ -52,7 +53,7 @@ import java.util.*;
  */
 
 
-public class RegistrationActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class RegistrationActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -87,8 +88,16 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int temp = com.example.paul.demo.themeHandler.getTheme();
+        if(temp == 0) {
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeBlue);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.new_email);
         mPasswordView = (EditText) findViewById(R.id.new_password);

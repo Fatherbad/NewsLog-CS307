@@ -1,5 +1,6 @@
 package com.example.paul.demo;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -45,7 +46,7 @@ import java.util.ArrayList;
 /**
  * Created by stephen on 10/10/15.
  */
-public class NewsActivity extends AppCompatActivity {
+public class NewsActivity extends Activity {
 
     //NEED 3 NEWS PAGES --- KEEP IN MIND FOR DEV
     //private String pageLeft; //= "http://www.nytimes.com/2015/10/07/business/international/vw-diesel-emissions-job-cuts.html";
@@ -70,6 +71,13 @@ public class NewsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int temp = com.example.paul.demo.themeHandler.getTheme();
+        if(temp == 0) {
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeBlue);
+        }
+
         Intent intent = getIntent();
         category = intent.getStringExtra("CATEGORY");
         email = intent.getStringExtra("EMAIL");
@@ -158,8 +166,8 @@ public class NewsActivity extends AppCompatActivity {
                         float diffY = y1 - y2;
                         if (Math.abs(diffX) > Math.abs(diffY) + 10 && Math.abs(x1 - x2) > SWIPE_THRESHOLD) {
                             if (x1 > x2) {
-                                onSwipeRight();
-                            } else onSwipeLeft();
+                                onSwipeLeft();
+                            } else onSwipeRight();
 
                             return true;
                         }
