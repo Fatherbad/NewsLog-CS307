@@ -100,7 +100,7 @@ public class NewsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    SaveArticle saveArticle = new SaveArticle(currPage, category.toLowerCase());
+                    SaveArticle saveArticle = new SaveArticle(webViews[1].getUrl(), category.toLowerCase());
                     saveArticle.execute();
                     saveArticle.get();
                 } catch (Exception ex) {ex.printStackTrace();}
@@ -245,7 +245,7 @@ public class NewsActivity extends AppCompatActivity {
         webViews[2].setVisibility(View.VISIBLE);
         setOnTouch(webViews[2]);
         try {
-            Swipes swipes = new Swipes(currPage, "right");
+            Swipes swipes = new Swipes(currPage, "left");
             swipes.execute();
             swipes.get();
         } catch (Exception ex){
