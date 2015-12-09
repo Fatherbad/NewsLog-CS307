@@ -1,19 +1,10 @@
 package com.example.paul.demo;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Picture;
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.view.GestureDetectorCompat;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,10 +15,8 @@ import android.os.Bundle;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +31,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-
+import com.example.paul.demo.R.anim;
 /**
  * Created by stephen on 10/10/15.
  */
@@ -470,8 +459,9 @@ public class NewsActivity extends Activity {
 
     private void animateL(final WebView view) {
         Animation anim = AnimationUtils.loadAnimation(getBaseContext(),
-                android.R.anim.slide_in_left);
+                R.anim.slide_out_left);
         view.startAnimation(anim);
+
         /*try {
             wait(100);
         }catch(InterruptedException wt){
