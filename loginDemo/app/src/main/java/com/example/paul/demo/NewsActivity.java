@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package com.example.paul.demo;
 
 import android.app.Activity;
@@ -525,3 +526,5 @@ public class NewsActivity extends Activity {
     }
     */
 }
+=======
+>>>>>>> Stashed changes

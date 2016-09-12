@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package com.example.paul.demo;
 
 import android.animation.Animator;
@@ -435,3 +436,5 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 }
 
+=======
+>>>>>>> Stashed changes

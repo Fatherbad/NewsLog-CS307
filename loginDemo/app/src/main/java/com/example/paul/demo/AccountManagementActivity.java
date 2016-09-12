@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package com.example.paul.demo;
 
 import android.app.Activity;
@@ -222,3 +223,5 @@ public class AccountManagementActivity extends Activity implements LoaderManager
     }
 
 }
+=======
+>>>>>>> Stashed changes

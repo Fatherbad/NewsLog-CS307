@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package com.example.paul.demo;
 
 import java.io.IOException;
@@ -25,3 +26,5 @@ public class SocketHandler {
         }
     }
 }
+=======
+>>>>>>> Stashed changes

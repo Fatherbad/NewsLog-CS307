@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
+<<<<<<< Updated upstream
     <modules>
       <module fileurl="file:///u/data/u95/nathan/cs307/NewsLog-CS307/loginDemo/app/app.iml" filepath="/u/data/u95/nathan/cs307/NewsLog-CS307/loginDemo/app/app.iml" />
       <module fileurl="file:///u/data/u95/nathan/cs307/NewsLog-CS307/loginDemo/loginDemo.iml" filepath="/u/data/u95/nathan/cs307/NewsLog-CS307/loginDemo/loginDemo.iml" />
     </modules>
+=======
+    <modules />
+>>>>>>> Stashed changes
   </component>
 </project>
+
